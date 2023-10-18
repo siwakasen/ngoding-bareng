@@ -1,0 +1,76 @@
+* {
+    font-family:  Roboto, sans-serif;
+}
+
+.section-footer {
+    background-color: #333333;
+    height: 100%;
+    color: #c4c4c4;
+}
+
+.container {
+    margin-top: 80px;
+}
+.brand{
+    padding-left: 20px;
+    max-width: 118px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Lucida Sans', sans-serif;
+}
+.image-container,dropdown{
+    padding: 0 25px;
+}
+.image-container img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.nav-link{
+    color: black;
+}
+.nav-link:hover{
+    color: rgb(125, 2, 173);
+}
+@media(min-width:800px){
+    #offcanvas{
+        display: none;
+    }
+}
+@media (max-width:800px){
+    #nav{
+        display: none;
+    }
+    #offcanvas{
+        display: block;
+    }
+    .image-container{
+        padding: 0 ;
+        display: flex;
+    }
+    .image-container img {
+        height: 65px;
+        width: 65px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .side-text{
+        padding: 0px 10px;
+    }
+    .side-text span{
+        display: flex;
+    }
+    #message{
+        font-size: 14px;
+        color: #6a6f73;
+    }
+    .custom-toggler {
+        border: none;
+        color: black;
+        border-radius: none;
+    }
+     .btn-close:focus {
+        --bs-btn-close-focus-shadow:none;
+    }
+}
