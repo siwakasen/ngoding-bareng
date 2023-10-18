@@ -17,15 +17,14 @@
         .container{
             margin-top: 80px;
         }
-        .navbar-nav{
-            display: block;
-        }
-        .navbar-item{
+        .navbar-brand{
             font-size: 15px;
             padding: 0 15px;
-            
         }
-        a img{
+        .image-container{
+            display: inline-block;
+        }
+        .image-container img{
             height: 50px;
             width: 50px;
             object-fit: cover;
@@ -37,14 +36,17 @@
 <body>
     <nav class="navbar fixed-top bg-body-tertiary shadow">
         <div class="container-fluid text-end">
-            <ul class="py-2 container-fluid navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Course</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Article</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"></li>
-                <li class="nav-item"><a class="nav-link" href=""><img src="{{asset('images/ryan-gosling.jpg')}}" alt=""></a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-sharp fa-solid fa-bars fa-2xl"></i></a></li>
-            </ul>
+            <div class="py-2 container-fluid">
+                <a class="navbar-brand" href="#">Dashboard</a>
+                <a class="navbar-brand" href="#">Course</a>
+                <a class="navbar-brand" href="#">Article</a>
+                <a class="navbar-brand" href="#">
+                    <div class="image-container">
+                        <img src="{{asset('images/ryan-gosling.jpg')}}" alt="">
+                    </div>
+                </a>
+                <a class="navbar-brand" href="#"><i class="fa-sharp fa-solid fa-bars fa-2xl"></i></a>
+            </div>
         </div>
     </nav>
 
