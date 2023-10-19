@@ -3,9 +3,9 @@
 }
 
 .section-footer {
-    background-color: #333333;
+    background-color: #0057a8;
     height: 100%;
-    color: #c4c4c4;
+    color: #ffffff;
 }
 
 .container {
@@ -27,15 +27,26 @@
     object-fit: cover;
     border-radius: 50%;
 }
+.icons{
+    display: inline-block;
+    width: 25px;
+}
 .nav-link{
     color: black;
 }
 .nav-link:hover{
-    color: rgb(125, 2, 173);
+    color: #0057a8;
+}
+h3{
+    display: inline-block;
+    width: 150px;
 }
 @media(min-width:800px){
     #offcanvas{
         display: none;
+    }
+    .nav-item{
+        padding-right: 20px;
     }
 }
 @media (max-width:800px){
@@ -69,8 +80,15 @@
         border: none;
         color: black;
         border-radius: none;
+        background-color: #f8f9fa;
     }
      .btn-close:focus {
         --bs-btn-close-focus-shadow:none;
+    }
+    .dropdown-item{
+        padding: 10px 0;
+    }
+    .dropdown-item:hover{
+        color: #0057a8;
     }
 }
