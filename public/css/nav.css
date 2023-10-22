@@ -1,5 +1,12 @@
 * {
+    
     font-family:  Roboto, sans-serif;
+}
+
+.navbar-sticky{
+    position: sticky;
+    z-index: 999;
+    top: 0;
 }
 
 .section-footer {
@@ -8,9 +15,6 @@
     color: #ffffff;
 }
 
-.container {
-    margin-top: 80px;
-}
 .brand{
     padding-left: 20px;
     max-width: 118px;
