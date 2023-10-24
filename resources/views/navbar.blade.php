@@ -28,7 +28,7 @@
 <body>
     <nav class="navbar navbar-sticky navbar-expand bg-body-tertiary shadow" id="nav">
         <div class="brand">
-            <a href="" class="nav-link">
+            <a href="{{asset('/')}}" class="nav-link">
                 ngoding-bareng
             </a>
         </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="dropdown">
                 <a class="navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false"><i class=" fa-solid fa-bars fa-2xl"></i></a>
+                    aria-expanded="false"><i class=" fa-solid fa-bars fa-xl"></i></a>
                 <div class="dropdown-menu dropdown-menu-end mt-4">
                     <a href="" class="dropdown-item pt-1">
                         <div class="icons">
@@ -59,7 +59,7 @@
                         </div>
                         <span class="ms-1">Setting</span>
                     </a>
-                    <a href="" class="dropdown-item pt-1">
+                    <a href="{{ asset('/cartPage') }}" class="dropdown-item pt-1">
                         <div class="icons">
                             <i class="fa-solid fa-cart-shopping fa-lg"></i>
                         </div>
@@ -97,7 +97,7 @@
                 <div class="offcanvas-header justify-content-end">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="image-container ps-3">
+                <div class="image-container ps-4">
                     <a href="{{ asset('/profile') }}">
                         <img src="{{ asset('images/ryan-gosling.jpg') }}" alt="">
                     </a>
@@ -106,7 +106,7 @@
                         <span id="message">Welcome back</span>
                     </div>
                 </div>
-                <div class="offcanvas-body">
+                <div class="offcanvas-body p-4">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a href="{{ asset('/dashboard') }}" class="nav-link">Dashboard</a>
@@ -125,7 +125,7 @@
                         </div>
                         <span class="ms-1">Setting</span>
                     </a>
-                    <a href="" class="dropdown-item pe-5 pt-1">
+                    <a href="{{ asset('/cartPage') }}" class="dropdown-item pe-5 pt-1">
                         <div class="icons">
                             <i class="fa-solid fa-cart-shopping fa-lg"></i>
                         </div>
@@ -150,7 +150,7 @@
     <div class="container-fluid">
         @yield('content')
     </div>
-    <section class="section-footer text-center">
+    <section class="section-footer text-center mt-1">
         <div class="py-3 m-0">
             <h6>&copy;Copyright 2023</h6>
         </div>
@@ -186,7 +186,7 @@
                 500: {
                     items: 2
                 },
-                700: {
+                800: {
                     items: 3
                 },
                 1200: {

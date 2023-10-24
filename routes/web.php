@@ -108,10 +108,115 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/dashboard', function () {
-    return view('userPage/dashboardUser');
+    return view('userPage/dashboardUser',[
+        'course'=>[
+            [
+                "image"=> "https://i.ytimg.com/vi/bxOPd_b0rg4/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCb3MocLWTJWD_f742Et8caUaCe_A",
+                'title'=> 'Java OOP',
+                'category'=> 'Object Oriented Programming',
+                'price'=> 25000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/WtBF_-pLrjE/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAS1cFgZ6xwimHwtXkkuDaS9naL7Q",
+                'title'=> 'C++',
+                'category'=> 'Dasar Pemrograman',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/uHyfQV0kbgo/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBCbUKei--c6pfGruPirTh5DtBygw",
+                'title'=> 'Java',
+                'category'=> 'Dasar Pemrograman',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/vp5CsI0Qn28/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhFIEMoZTAP&rs=AOn4CLDaByNR5HxeBycZ8j9avVjzYPcbmQ",
+                'title'=> 'PHP',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/JXXUBiJGu94/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDnQT-BNLIdmeglftGRJ5MEvP3oYQ",
+                'title'=> 'MongoDB',
+                'category'=> 'Database',
+                'price'=> 30000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/LLT6EAtX-x8/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCZo1OcSY_YlnwOilz8fG9xkwitog",
+                'title'=> 'Javascript Async',
+                'category'=> 'Pemrograman Web',
+                'price'=> 25000,
+            ],
+
+        ],
+    ]);
 });
 Route::get('/courses', function () {
-    return view('userPage/courses/coursePage');
+    return view('userPage/courses/coursePage',[
+        'categories'=>['Dasar Pemrograman','Pemrograman Web', 'Database','OOP','Mobile'],
+        'course'=>[
+            [   
+                "image"=> "https://i.ytimg.com/vi/wriGST3vp5M/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCR8wCjPDJnuw1tE0M4-Cjcmc8pGQ",
+                'title'=> 'HTML Dasar',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/AQOBN9XByf0/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBJMg3R7ba-3F41Yx-etBVWEGGghw",
+                'title'=> 'CSS Dasar',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/pJpnMyFNaz0/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD6XInzA980lKTwEIjwuaZf66XfYw",
+                'title'=> 'Bootstrap Dasar',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/bxOPd_b0rg4/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCb3MocLWTJWD_f742Et8caUaCe_A",
+                'title'=> 'Java OOP',
+                'category'=> 'Object Oriented Programming',
+                'price'=> 25000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/WtBF_-pLrjE/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAS1cFgZ6xwimHwtXkkuDaS9naL7Q",
+                'title'=> 'C++',
+                'category'=> 'Dasar Pemrograman',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/uHyfQV0kbgo/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBCbUKei--c6pfGruPirTh5DtBygw",
+                'title'=> 'Java',
+                'category'=> 'Dasar Pemrograman',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/vp5CsI0Qn28/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhFIEMoZTAP&rs=AOn4CLDaByNR5HxeBycZ8j9avVjzYPcbmQ",
+                'title'=> 'PHP',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/JXXUBiJGu94/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDnQT-BNLIdmeglftGRJ5MEvP3oYQ",
+                'title'=> 'MongoDB',
+                'category'=> 'Database',
+                'price'=> 30000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/LLT6EAtX-x8/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCZo1OcSY_YlnwOilz8fG9xkwitog",
+                'title'=> 'Javascript Async',
+                'category'=> 'Pemrograman Web',
+                'price'=> 25000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/6dSNbskzlz4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLD5XF2jCeFVPBVadjrowmc25XjtZw",
+                'title'=> 'Kotlin',
+                'category'=> 'Mobile',
+                'price'=> 35000,
+            ],
+
+        ],
+    ]);
 });
 Route::get('/articles', function () {
     return view('userPage/articles/articlePage');
@@ -121,4 +226,74 @@ Route::get('/profile', function () {
 });
 Route::get('/login', function () {
     return view('guestPage/loginPage');
+});
+Route::get('/cartPage', function () {
+    return view('userPage/courses/chartPage',[
+        'course'=>[
+            [   
+                "image"=> "https://i.ytimg.com/vi/wriGST3vp5M/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCR8wCjPDJnuw1tE0M4-Cjcmc8pGQ",
+                'title'=> 'HTML Dasar',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/AQOBN9XByf0/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBJMg3R7ba-3F41Yx-etBVWEGGghw",
+                'title'=> 'CSS Dasar',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/pJpnMyFNaz0/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD6XInzA980lKTwEIjwuaZf66XfYw",
+                'title'=> 'Bootstrap Dasar',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/bxOPd_b0rg4/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCb3MocLWTJWD_f742Et8caUaCe_A",
+                'title'=> 'Java OOP',
+                'category'=> 'Object Oriented Programming',
+                'price'=> 25000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/WtBF_-pLrjE/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAS1cFgZ6xwimHwtXkkuDaS9naL7Q",
+                'title'=> 'C++',
+                'category'=> 'Dasar Pemrograman',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/uHyfQV0kbgo/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBCbUKei--c6pfGruPirTh5DtBygw",
+                'title'=> 'Java',
+                'category'=> 'Dasar Pemrograman',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/vp5CsI0Qn28/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhFIEMoZTAP&rs=AOn4CLDaByNR5HxeBycZ8j9avVjzYPcbmQ",
+                'title'=> 'PHP',
+                'category'=> 'Pemrograman Web',
+                'price'=> 15000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/JXXUBiJGu94/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDnQT-BNLIdmeglftGRJ5MEvP3oYQ",
+                'title'=> 'MongoDB',
+                'category'=> 'Database',
+                'price'=> 30000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/LLT6EAtX-x8/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCZo1OcSY_YlnwOilz8fG9xkwitog",
+                'title'=> 'Javascript Async',
+                'category'=> 'Pemrograman Web',
+                'price'=> 25000,
+            ],
+            [
+                "image"=> "https://i.ytimg.com/vi/6dSNbskzlz4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLD5XF2jCeFVPBVadjrowmc25XjtZw",
+                'title'=> 'Kotlin',
+                'category'=> 'Mobile',
+                'price'=> 35000,
+            ],
+
+        ],
+    ]);
+});
+Route::get('/checkout', function () {
+    return view('userPage/checkoutPage');
 });

@@ -71,7 +71,7 @@ h3{
         border-radius: 50%;
     }
     .side-text{
-        padding: 0px 10px;
+        padding: 10px;
     }
     .side-text span{
         display: flex;
@@ -96,3 +96,4 @@ h3{
         color: #0057a8;
     }
 }
+

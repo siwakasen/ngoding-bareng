@@ -2,10 +2,6 @@
 
 @section('content')
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
         .header {
             width: 92%;
             height: 250px;
@@ -18,6 +14,7 @@
 
         .search-wrapper {
             width: 30%;
+            min-width: 250px;
             margin: 0 auto;
             margin-top: 20px;
         }
@@ -30,7 +27,7 @@
         }
 
         form {
-            border-radius: 15px;
+            border-radius: 10px;
             display: flex;
             background-color: white;
             transition: 0.8s;
@@ -59,15 +56,18 @@
         }
 
         .title {
-            padding-top: 20px;
+            padding-top: 30px;
             font-weight: bold;
+            color: rgb(78, 77, 77);
+            margin: 0;
+            width: 100%;
         }
 
         .card-wrapper {
-            padding: 20px;
+            padding: 10px 20px;
         }
 
-        .card {
+        .item-card {
             display: inline-block;
             transition: 0.5s;
         }
@@ -80,17 +80,15 @@
         .card:hover {
             transform: scale(105%);
         }
-        .card-title{
-            margin:0;
-            font-size: 18px;
-            font-weight:500;
-        }
-        .card-text{
-            font-size:14px;
 
+        .card-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 500;
         }
-        .card-body hr{
-            margin: 2px;
+
+        .card-text {
+            font-size: 16px;
         }
     </style>
 
@@ -102,34 +100,35 @@
         <div class="search-wrapper">
             <form action="">
                 <input type="text" placeholder="Search for anything" class="form-control">
-                <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
+                <button type="submit" class="search-button"><i
+                        class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
             </form>
         </div>
     </div>
     <div class="content">
-        <h4 class="title">What to learn</h4>
+        <h3 class="title">What to learn</h3>
         <div class="owl-carousel owl-theme">
             @foreach ($course as $item)
-            <div class="card-wrapper">
-                <div class="card" style="width: 100%;">
-                    <a href="">
-                        <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $item['title'] }}</h5>
-                            <p class="card-text">{{ $item['category'] }}</p>
-                        </div>
-                        <div class="card-footer">
-                            <p class="card-text">Buy: {{$item['price']}}</p>
-                        </div>
-                    </a>
+                <div class="card-wrapper">
+                    <div class="card item-card" style="width: 100%;">
+                        <a href="">
+                            <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $item['title'] }}</h5>
+                                <p class="card-text">{{ $item['category'] }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text">Buy: {{ $item['price'] }}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
             @endforeach
         </div>
-        <h4 class="title">Catch up the news</h4>
+        <h3 class="title">Catch up the news</h3>
         <div class="owl-carousel owl-theme">
             @foreach ($article as $item)
-                <div class="card-wrapper ">
+                <div class="card-wrapper">
                     <div class="card item" style="width: 100%;">
                         <a href="">
                             <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
