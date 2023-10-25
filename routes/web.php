@@ -529,9 +529,6 @@ Route::get('/manageArticle', function () {
         ]
     ]);
 });
-Route::get('/profile', function () {
-    return view('userPage/profilePage');
-});
 Route::get('/login', function () {
     return view('guestPage/loginPage');
 });
