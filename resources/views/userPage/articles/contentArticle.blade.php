@@ -55,7 +55,7 @@
                 font-size: 20px;
             }
 
-            @media screen and (max-width: 900px) {
+            @media screen and (max-width: 800px) {
 
                 .content-text {
                     padding-left: 2%;

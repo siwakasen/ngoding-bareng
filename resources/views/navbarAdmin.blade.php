@@ -33,13 +33,13 @@
         <div class="container-fluid justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="{{ asset('/dashboard') }}" class="nav-link">Dashboard</a>
+                    <a href="{{ asset('/admin') }}" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ asset('/courses') }}" class="nav-link">Courses</a>
+                    <a href="{{ asset('/manageCourse') }}" class="nav-link">Manage Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ asset('/articles') }}" class="nav-link">Articles</a>
+                    <a href="{{ asset('/manageArticle') }}" class="nav-link">Manage Articles</a>
                 </li>
             </ul>
             <div class="image-container">
@@ -56,18 +56,6 @@
                             <i class="fa-solid fa-gear fa-lg"></i>
                         </div>
                         <span class="ms-1">Setting</span>
-                    </a>
-                    <a href="{{ asset('/cartPage') }}" class="dropdown-item pt-1">
-                        <div class="icons">
-                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                        </div>
-                        <span class="ms-1">My Cart</span>
-                    </a>
-                    <a href="" class="dropdown-item pt-1">
-                        <div class="icons">
-                            <i class="fa-regular fa-circle-question fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Help</span>
                     </a>
                     <a href="{{ asset('/login') }}" class="dropdown-item pt-1">
                         <div class="icons">
@@ -106,13 +94,13 @@
                 <div class="offcanvas-body p-4">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a href="{{ asset('/dashboard') }}" class="nav-link">Dashboard</a>
+                            <a href="{{ asset('/admin') }}" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ asset('/courses') }}" class="nav-link">Courses</a>
+                            <a href="{{ asset('/manageCourse') }}" class="nav-link">Manage Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ asset('/articles') }}" class="nav-link">Articles</a>
+                            <a href="{{ asset('/manageArticle') }}" class="nav-link">Manage Articles</a>
                         </li>
                     </ul>
                     <hr>
@@ -162,35 +150,6 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{-- Owl Carousel JS --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-
-    <script>
-        $('.owl-carousel').owlCarousel({
-            loop: true, 
-            autoplay: true,
-            autoplayTimeout: 2000,
-            autoplayHoverPause: true,
-            smartSpeed:700,
-            dots:false,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                500: {
-                    items: 2
-                },
-                800: {
-                    items: 3
-                },
-                1200: {
-                    items: 4
-                },
-            }
-        });
-    </script>
 </body>
     
 </html>

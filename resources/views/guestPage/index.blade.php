@@ -1,4 +1,5 @@
-@extends('navbar')
+
+@extends('navbarGuest')
 
 @section('content')
     <style>

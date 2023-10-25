@@ -1,4 +1,4 @@
-@extends('navbar')
+@extends('navbarGuest')
 @section('content')
         <title>Halaman Pendaftaran</title>
         <style>
@@ -37,7 +37,7 @@
                 color: red;
                 margin-top: 10px;
             }
-            .btn{
+            .card .btn{
                 width: 70%;
             }
             
@@ -51,12 +51,12 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card container-fluid">
+                    <div class="card container-fluid mb-1">
                         <div class="logo" >
                             <h2 style="display: inline-block; text-align: left; color: #0057a8; font-weight: bold">ngoding-
                                 <div>bareng</div></h2>
                         </div>
-                        <form id="registrationForm" action="{{ url('/loginPage') }}" method="post">
+                        <form id="registrationForm" action="{{ url('/login') }}" method="get">
                             <input type="text" name="name" id="name" placeholder="Name" required>
                             <input type="text" name="username" id="username" placeholder="Username" required>
                             <input type="password" name="password" id="password" placeholder="Password" required>
@@ -67,6 +67,7 @@
                             <button type="sumbit" class="btn btn-primary fs-4">Sign Up</button>
                         </form>
                     </div>
+                    <p class="text-center">Already have an account? <a href="{{asset('/login')}}">Log in</a></p>
                 </div>
             </div>
         </div>

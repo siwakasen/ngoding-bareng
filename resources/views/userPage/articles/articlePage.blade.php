@@ -10,7 +10,7 @@
             padding: 50px;
             padding-bottom: 10px;
             text-align: center;
-            background: url('https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background: url('https://img.freepik.com/free-photo/beautiful-shining-stars-night-sky_181624-622.jpg?w=1380&t=st=1698241352~exp=1698241952~hmac=c85350f8fef2c7ba800318e963c5463b62b5af6df1b75a80f49175defce077df');
             background-position: center center, center top;
             background-repeat: repeat, no-repeat;
         }

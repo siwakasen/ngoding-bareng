@@ -36,7 +36,7 @@
         <div class="card mb-3 border-0">
             <div class="row g-0">
               <div class="col-auto">
-                <img src="{{asset('images/ryan-gosling.jpg')}}" class="img-fluid rounded-pill" alt="..." style="width:250px;">
+                <img src="{{asset('images/kiwi.jpg')}}" class="img-fluid rounded-pill" alt="..." style="width:250px;">
               </div>
               <div class="col-auto">
                 <div class="card-body my-2 mx-3">

@@ -33,18 +33,21 @@
         <div class="container-fluid justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="{{ asset('/dashboard') }}" class="nav-link">Dashboard</a>
+                    <a href="{{ asset('/') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ asset('/courses') }}" class="nav-link">Courses</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item pe-1">
                     <a href="{{ asset('/articles') }}" class="nav-link">Articles</a>
                 </li>
             </ul>
-            <div class="image-container">
-                <a href="{{ asset('/profile') }}">
-                    <img src="{{ asset('images/kiwi.jpg') }}" alt="">
+            <div class="button-container m-3">
+                <a href="{{ url('login') }}" class="text-decoration-none">
+                    <button type="button" class="btn btn-outline-dark rounded-0">Log in</button>
+                </a>
+                <a href="{{ url('signUp') }}" class="text-decoration-none">
+                    <button type="button" class="btn btn-dark rounded-0">Sign up</button>
                 </a>
             </div>
             <div class="dropdown">
@@ -106,7 +109,7 @@
                 <div class="offcanvas-body p-4">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a href="{{ asset('/dashboard') }}" class="nav-link">Dashboard</a>
+                            <a href="{{ asset('/') }}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ asset('/courses') }}" class="nav-link">Courses</a>

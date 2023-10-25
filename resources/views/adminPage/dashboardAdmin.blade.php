@@ -1,4 +1,4 @@
-@extends('navbar')
+@extends('navbarAdmin')
 @section('content')
     <style>
         .section-footer {
@@ -71,6 +71,7 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Username</th>
+                        <th></th>
                         <th scope="col">Login time</th>
                         <th scope="col">Logout time</th>
                     </tr>
@@ -80,6 +81,7 @@
                         <tr>
                             <td scope="row">{{ $user['name'] }}</td>
                             <td>{{ $user['username'] }}</td>
+                            <td></td>
                             <td>{{ $user['login'] }}</td>
                             <td>{{ $user['logout'] }}</td>
                         </tr>

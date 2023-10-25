@@ -82,7 +82,7 @@
                   <div class="question-users mt-2">
                     <form action="" class="row">
                         <div class="profile col-auto" style="">
-                            <img src="{{asset('images/ryan-gosling.jpg')}}" alt="" class="img-fluid rounded-pill" style="max-height: 45px; max-width: 45px;">
+                            <img src="{{asset('images/kiwi.jpg')}}" alt="" class="img-fluid rounded-pill" style="max-height: 45px; max-width: 45px;">
                         </div>
                         <p class="d-inline-flex gap-1 col p-0" style="width: 100%">
                             <input class="form-control" placeholder="Add a question..." type="text" name="questionInput" id="questionInput" data-bs-toggle="collapse" href="#collapseQuestion"  aria-expanded="false" aria-controls="collapseQuestion">
@@ -109,7 +109,7 @@
                                         <button type="button" class="btn btn-light rounded-pill" data-bs-toggle="collapse" href="#{{asset($user['id'])}}"  aria-expanded="false">Reply</button>
                                         <div class="collapse text-end row" id="{{asset($user['id'])}}">
                                             <div class="profile col-auto pt-1" style="">
-                                                <img src="{{asset('images/ryan-gosling.jpg')}}" alt="" class="img-fluid rounded-pill" style="max-height: 35px; max-width: 35px;">
+                                                <img src="{{asset('images/kiwi.jpg')}}" alt="" class="img-fluid rounded-pill" style="max-height: 35px; max-width: 35px;">
                                             </div>
                                               <p class="d-inline-flex gap-1 col p-0" style="width: 100%">
                                                   <input class="form-control" placeholder="Add a reply..." type="text" name="questionInput" id="questionInput">

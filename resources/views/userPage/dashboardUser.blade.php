@@ -84,12 +84,14 @@
     <div class="profile-container col-5">
         <div class="card shadow mx-auto" style=" width: 50%">
             <div class="profile-image px-3">
-                <img src="{{asset('images/ryan-gosling.jpg')}}" class="card-img-top" alt="...">
+                <img src="{{asset('images/kiwi.jpg')}}" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
               <p class="card-text fs-4 text-center">Ryan Gosling</p>
             </div>
-            <button type="button" class="btn btn-outline-primary rounded-top-0">Detail Profile</button>
+            <a href="{{asset('/profile')}}" style="width: 100%">
+                <button type="button" class="btn btn-outline-primary rounded-top-0" style="width: 100%">Detail Profile</button>
+            </a>
           </div>
     </div>
 </div>
