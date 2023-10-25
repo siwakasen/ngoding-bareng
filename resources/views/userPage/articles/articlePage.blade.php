@@ -37,9 +37,7 @@
             margin: 0 260px;
         }
 
-        .news-image {
-            max-width: 100%;
-        }
+        
 
         .divider {
             width: 100%;
@@ -74,14 +72,18 @@
         }
 
         .articles-container {
-            margin-bottom: 40px;
+            padding: 20px;
+            padding-left: 0;
         }
 
         .articles-container a {
             text-decoration: none;
             color: #333333;
         }
-
+        .news-article .row:hover{
+            color: #9c9898;
+            filter: opacity(80%);
+        }
         @media screen and (max-width: 1100px) {
             .news-head {
                 max-width: 100%;
@@ -135,7 +137,7 @@
                     <a href="{{ url('contentArticle') }}">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{ $item['gambarArticle'] }}" alt="Image" class="img-fluid news-image"
+                                <img src="{{ $item['gambarArticle'] }}" alt="Image" class="img-fluid news-image object-fit-cover"
                                     style="height: 200px; width: 346px">
                             </div>
                             <div class="col-md-8">

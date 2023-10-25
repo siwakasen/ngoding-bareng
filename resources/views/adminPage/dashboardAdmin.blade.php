@@ -26,8 +26,7 @@
             border: 1px solid #0000002c;
             padding: 10px;
             text-align: center;
-            background-color: rgb(196, 196, 196);
-            color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
             margin: 0 10px;
             border-radius: 7px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -52,15 +51,15 @@
             <h1>Dashboard</h1>
             <hr>
             <div class="box-container">
-                <div class="box bg-success">
+                <div class="box" style="background-image: linear-gradient(to right, #037ae9 , #0160b9);">
                     <h2>42</h2>
                     <p>Guest Visitors</p>
                 </div>
-                <div class="box bg-warning">
+                <div class="box" style="background-image: linear-gradient(to right, #0160b9 , #003668);">
                     <h2>15</h2>
                     <p>Logged Users Online</p>
                 </div>
-                <div class="box bg-secondary">
+                <div class="box b" style="background-image: linear-gradient(to right, #003668 , #00172c);">
                     <h2>120</h2>
                     <p>Registered Users</p>
                 </div>
