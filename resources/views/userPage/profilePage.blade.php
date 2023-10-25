@@ -1,69 +1,55 @@
 @extends('navbar')
 @section('content')
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Technology News</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
+        .section-footer{
+                position: absolute;
+            }
+        .container-fluid{
             padding: 0;
         }
 
-        .container {
-            max-width: 100%;
-            padding: 10px;
-            background-color: #fff;
-            margin: 0;
-        }
-
         .profile-card{
-            border: solid; 
-            margin-top: 20px;
+            border: 1px solid #6b6f74; 
+            margin: 20px;
             padding: 20px;
         }
 
-        .profile-image {
-            border-radius: 50%; /* Membuat gambar profil menjadi lingkaran */
-            border: 4px solid; /* Menambahkan border solid dengan warna biru dan tebal 4px */
-            width: 300px; /* Menambahkan lebar gambar */
-            height: 300px; /* Menambahkan tinggi gambar */
-        }
-
         .profile-heading {
-            background-color: #3498db; /* Warna latar belakang biru */
-            color: #fff; /* Warna teks putih */
-            padding: 10px; /* Ruang dalam teks */
-            padding-top: 80px;
+            background-color: #0057a8; 
+            color: #fff;
+            padding: 10px; 
+        }
+        .profile-title{
+            font-weight: 500;
+        }
+        @media(max-width:1200px){
+            .card{
+            }
         }
     </style>
-</head>
-<body>
-<div class="container">
-    @forelse($isiProfile as $item)
+
     <div class="profile-heading">
         <h2>Your Profile</h2>
     </div>
-    <div class="profile-card" >
-        <div class="row">
-            <div class="col-md-3">
-                <img class="profile-image" src="{{$item['gProfile']}}" alt="Your Profile Picture">
+    @forelse($user as $user)
+    <div class="profile-card">
+        <div class="card mb-3 border-0">
+            <div class="row g-0">
+              <div class="col-auto">
+                <img src="{{asset('images/ryan-gosling.jpg')}}" class="img-fluid rounded-pill" alt="..." style="width:250px;">
+              </div>
+              <div class="col-auto">
+                <div class="card-body my-2 mx-3">
+                    <h4 class="profile-title" style="">Name</h4>
+                    <p>{{$user['name']}}</p>
+                    <h4 class="profile-title">Email</h4>
+                    <p>{{$user['email']}}</p>
+                    <h4 class="profile-title">Phone number</h4>
+                    <p>{{$user['phoneNumber']}}</p>
+                </div>
+              </div>
             </div>
-                <div class="col-md-9">
-                <h4 class="profile-name" style="margin-top:5%;">Nama</h4>
-                <p>{{$item['isiProfile1']}}</p>
-                <h4 class="profile-email">Email</h4>
-                <p>{{$item['isiProfile2']}}</p>
-                <h4 class="profile-phone">Handphone</h4>
-                <p>{{$item['isiProfile3']}}</p>
-            </div>
-        </div>
+          </div>
     </div>
     @endforeach
-</div>
-</body>
-</html>
 @endsection

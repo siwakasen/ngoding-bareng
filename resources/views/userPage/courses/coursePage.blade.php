@@ -13,7 +13,8 @@
         }
 
         .search-wrapper {
-            min-width: 250px;
+            min-width: 300px;
+            max-width: 30%;
             margin: 0 auto;
         }
 
@@ -29,6 +30,9 @@
             display: flex;
             background-color: white;
             transition: 0.8s;
+        }
+        form:hover {
+            transform: scale(110%);
         }
 
         .form-control {
@@ -76,18 +80,23 @@
             background-color:#f1f1f1;
             color: black;
         }
+        .header{
+            background: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-position: center center, center top;
+            background-repeat: repeat, no-repeat;
+        }
     </style>
 
 
     <div class="header">
-        <div class="search-wrapper">
-            <form action="">
-                <input type="text" placeholder="Search your favorit course here!" class="form-control">
-                <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
-            </form>
-        </div>
         <div class="title text-center text-white p-4 m-5">
-            <h1 style="font-size: 50px">Learn Many Things Here</h1>
+            <h1 style="font-size: 50px; overflow: hidden; max-height: 120px;" class="text-shadow">Learn Many Things Here</h1>
+            <div class="search-wrapper">
+                <form action="">
+                    <input type="text" placeholder="Search your favorit course here!" class="form-control">
+                    <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
+                </form>
+            </div>
         </div>
     </div>
 

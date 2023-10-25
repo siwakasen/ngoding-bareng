@@ -2,6 +2,13 @@
     
     font-family:  Roboto, sans-serif;
 }
+html {
+    height: 100%;
+  }
+
+body{
+    min-height: 100%;
+}
 
 .navbar-sticky{
     position: sticky;
@@ -11,8 +18,10 @@
 
 .section-footer {
     background-color: #0057a8;
-    height: 100%;
+    width: 100%;
     color: #ffffff;
+    position: relative;
+    bottom: 0;
 }
 
 .brand{

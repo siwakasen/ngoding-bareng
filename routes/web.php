@@ -106,8 +106,11 @@ Route::get('/', function () {
         ]
     ]);
 });
-Route::get('admin',function(){
+Route::get('/admin',function(){
     return view('adminPage/dashboardAdmin');
+});
+Route::get('/signUp',function(){
+    return view('/guestPage/signUpPage');
 });
 Route::get('/dashboard', function () {
     return view('userPage/dashboardUser',[
@@ -223,9 +226,6 @@ Route::get('/courses', function () {
 Route::get('/articles', function () {
     return view('userPage/articles/articlePage');
 });
-Route::get('/profile', function () {
-    return view('userPage/profilePage');
-});
 Route::get('/login', function () {
     return view('guestPage/loginPage');
 });
@@ -326,7 +326,7 @@ Route::get('/contentArticle', function () {
     return view('userPage/articles/contentArticle',[
         'newsletter1'=>[
             [
-            'gambar' => 'https://assets-global.website-files.com/62d577cf8d48796fc4c03527/64e46f1da8d1070a8c1f0283_thumbnail-fox%20quco-01-p-500.jpg',
+            'gambar' => 'images/cyber-monday.jpg',
             'gambar2' => 'https://assets-global.website-files.com/62d577cf8d48796fc4c03527/64e3b3ba9cfc2ea4c1144d3a_gif1-fox-quco%20(1)%20(1)-min.gif',
             'judul' => '🖥️ Komputer Kuantum Bukan Seperti yang Kalian Kira (Dan Bisa Bahaya)',
             'isi' => 'Kalau denger kata “komputer kuantum”, apa sih yang muncul di pikiran kalian? Apa mungkin langsung kebayang komputer yang bisa bikin manusia mengecil, terus bisa jalan-jalan lintas waktu? 👀',
@@ -340,12 +340,11 @@ Route::get('/contentArticle', function () {
 
 Route::get('/profile', function () {
     return view('userPage/profilePage',[
-        'isiProfile' => [
+        'user' => [
             [
-                'gProfile' => 'https://th.bing.com/th/id/OIP.MUg4Xlf4DFZYhZJG66hWegHaEK?w=308&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7',
-                'isiProfile1' => 'Kelompok 5 Pemrograman Web',
-                'isiProfile2' => 'PemrogramanWebKelompok5@student.uajy.ac.id',
-                'isiProfile3' => '0869696969696969'
+                'name' => 'Ryan Gosling',
+                'email' => 'ryangosling@student.uajy.ac.id',
+                'phoneNumber' => '08721347916123'
             ]
         ]
     ]);
@@ -355,12 +354,41 @@ Route::get('/articles', function () {
     return view('userPage/articles/articlePage',[
         'isiArticlePage' => [
             [
-                'gambarArticle' => 'https://assets-global.website-files.com/62d577cf8d48796fc4c03527/64e46f1da8d1070a8c1f0283_thumbnail-fox%20quco-01-p-500.jpg',
-                'jArticle' => ' 🖥️ Komputer Kuantum Bukan Seperti yang Kalian Kira (Dan Bisa Bahaya)',
+                'gambarArticle' => 'images/cyber-monday.jpg',
+                'jArticle' => ' Cyber Monday! IC3 menemukan Ransomware baru yang berbahaya',
                 'desArticle' => 'Komputer kuantum adalah teknologi yang dianggap sebagai terobosan besar dalam dunia komputasi. Mereka memiliki potensi untuk mengubah cara kita memproses dan menganalisis informasi.',
                 'jamArticle' => 'October 20, 2023',
-                'lamaArticle' => '5 Menit Waktu Baca'
-            ]
+            ],
+            [
+                'gambarArticle' => 'https://img.freepik.com/free-vector/gradient-colored-vpn-illustration_23-2149226916.jpg?size=626&ext=jpg&ga=GA1.1.1861995214.1697819799&semt=sph',
+                'jArticle' => ' 🧠 Bagaimana VPN Bekerja?',
+                'desArticle' => 'Komputer kuantum adalah teknologi yang dianggap sebagai terobosan besar dalam dunia komputasi. Mereka memiliki potensi untuk mengubah cara kita memproses dan menganalisis informasi.',
+                'jamArticle' => 'October 20, 2023',
+            ],
+            [
+                'gambarArticle' => 'https://assets-global.website-files.com/62d577cf8d48796fc4c03527/64e46f1da8d1070a8c1f0283_thumbnail-fox%20quco-01-p-500.jpg',
+                'jArticle' => ' 🤖 Robot Pelayan: Tadinya Science Fiction, Sekarang
+                Mulai Jadi Kenyataan',
+                'desArticle' => 'Baru-baru ini Tesla Bot diumumkan ke publik. Mimpi untuk punya robot pelayan mungkin
+                tak lagi jauh dari kenyataan. Bisa seperti apa robot pelayan ini nantinya?
+                Klick untuk tau lebih lanjut, dan baca keseluruhan beritanya!!',
+                'jamArticle' => 'October 20, 2023',
+            ],
+            [
+                'gambarArticle' => 'images/internet-day.jpg',
+                'jArticle' => 'Selamat Hari Internet Sedunia',
+                'desArticle' => 'Bagaimana sih awal mula diciptakannya internet? Kok bisa ya kita berkomunikasi dengan orang yang jaraknya ribuan kilometer dari rumah kita,',
+                'jamArticle' => 'October 20, 2023',
+            ],
+            [
+                'gambarArticle' => 'https://assets-global.website-files.com/62d577cf8d48796fc4c03527/63ee6577ebd725464b8c7b7f_thumbnail-FOX-AIRV-B-p-500.png',
+                'jArticle' => ' 💿 Revolusi AI: Bagaimana AI Akan Mengubah Dunia
+                Selamanya',
+                'desArticle' => 'Kecerdasan buatan yang menandingi manusia bukan lagi teknologi masa depan.
+                Diam-diam, mereka sudah hadir dan akan "muncul" di mana-mana. Sudah siapkah kalian?
+                Klick untuk tau lebih lanjut, dan baca keseluruhan beritanya!!',
+                'jamArticle' => 'October 20, 2023',
+            ],
         ]
     ]);
 });
