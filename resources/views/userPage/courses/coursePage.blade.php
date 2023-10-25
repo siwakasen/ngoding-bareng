@@ -131,7 +131,7 @@
             </div>
         </div>
         <div class="group-course pt-3">
-            <div class="row  row-cols-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-4">
+            <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
                 @foreach ($course as $item)
                     <div class="col">
                         <div class="card-wrapper" style="max-width: 90%; margin: 0 auto;">
