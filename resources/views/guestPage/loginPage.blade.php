@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-body px-4 py-5">
-                            <form class="form" action="{{ url('dashboardAdmin') }}">
+                            <form class="form" action="{{ url('dashboard') }}">
                                 @csrf
                                 <div>
                                     <h2 class="mb-3 text-center"><strong>Login</strong></h2>
@@ -45,5 +45,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection

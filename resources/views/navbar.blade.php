@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ngoding Bareng</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,17 +20,17 @@
             <a href="" class="nav-link">
                 ngoding-bareng
             </a>
-           </div>
+        </div>
         <div class="container-fluid justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a href="{{asset('/dashboard')}}" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{asset('/courses')}}" class="nav-link">Courses</a>
+                    <a href="{{asset('/manageCourse')}}" class="nav-link">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{asset('/articles')}}" class="nav-link">Articles</a>
+                    <a href="{{asset('/manageArticle')}}" class="nav-link">Articles</a>
                 </li>
             </ul>
             <div class="image-container">
@@ -40,12 +39,11 @@
                 </a>
             </div>
             <div class="dropdown">
-                <a class="navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false"><i class=" fa-solid fa-bars fa-2xl"></i></a>
+                <a class="navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class=" fa-solid fa-bars fa-2xl"></i></a>
                 <div class="dropdown-menu dropdown-menu-end mt-4">
                     <a href="" class="dropdown-item pt-1">
                         <div class="icons">
-                            <i class="fa-solid fa-gear fa-lg"></i> 
+                            <i class="fa-solid fa-gear fa-lg"></i>
                         </div>
                         <span class="ms-1">Setting</span>
                     </a>
@@ -73,17 +71,15 @@
     </nav>
     <nav class="navbar fixed-top bg-body-tertiary shadow" id="offcanvas">
         <div class="container-fluid">
-           <div class="brand">
-            <a href="" class="nav-link">
-                ngoding-bareng
-            </a>
-           </div>
-            <button class="custom-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <div class="brand">
+                <a href="" class="nav-link">
+                    ngoding-bareng
+                </a>
+            </div>
+            <button class="custom-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars fa-2xl"></i>
             </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header justify-content-end">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
@@ -111,7 +107,7 @@
                     <hr>
                     <a href="" class="dropdown-item pe-5 pt-1">
                         <div class="icons">
-                            <i class="fa-solid fa-gear fa-lg"></i> 
+                            <i class="fa-solid fa-gear fa-lg"></i>
                         </div>
                         <span class="ms-1">Setting</span>
                     </a>
@@ -145,11 +141,9 @@
             <h3>ngoding-bareng</h3>
         </div>
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
 </body>
 
