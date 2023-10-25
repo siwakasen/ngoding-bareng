@@ -31,6 +31,7 @@
             background-color: white;
             transition: 0.8s;
         }
+
         form:hover {
             transform: scale(110%);
         }
@@ -76,11 +77,14 @@
         .card-text {
             font-size: 16px;
         }
-        .card-body,.card-footer{
-            background-color:#f1f1f1;
+
+        .card-body,
+        .card-footer {
+            background-color: #f1f1f1;
             color: black;
         }
-        .header{
+
+        .header {
             background: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
             background-position: center center, center top;
             background-repeat: repeat, no-repeat;
@@ -94,7 +98,8 @@
             <div class="search-wrapper">
                 <form action="">
                     <input type="text" placeholder="Search your favorit course here!" class="form-control">
-                    <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
+                    <button type="submit" class="search-button"><i
+                            class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
                 </form>
             </div>
         </div>
@@ -130,8 +135,7 @@
                 @foreach ($course as $item)
                     <div class="col">
                         <div class="card-wrapper" style="max-width: 90%; margin: 0 auto;">
-                            <div class="card item-card" style="width: 100%;">
-                                <a href="{{asset('/contentCourse')}}">
+                            <div class="card item-card" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#modalBuy">
                                     <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
                                     <div class="card-body p-1">
                                         <h5 class="card-title" style="font-size: 18px;">{{ $item['title'] }}</h5>
@@ -140,7 +144,6 @@
                                     <div class="card-footer ps-1">
                                         <p class="card-text">Buy: {{ $item['price'] }}</p>
                                     </div>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -148,4 +151,19 @@
             </div>
         </div>
     </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"  style="max-width: 300px;">
+      <div class="modal-content">
+        <div class="modal-header bg-primary p-2">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body bg-body-tertiary rounded-bottom">
+            Successfully adding to your cart
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
