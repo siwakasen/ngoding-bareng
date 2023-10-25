@@ -61,15 +61,15 @@
         <h2>Your Course</h2>
         <div class="container-course row">
             @foreach ($course as $item)
-            <div class="card rounded-2 col-6 p-0">
-                    <a href="" class="text-decoration-none">
+            <div class="card shadow rounded-2 col-6 p-0">
+                <a href="{{asset('/contentCourse')}}" class="text-decoration-none">
                     <div class="card-body p-1">
                         <div class="row mb-1">
                             <div class="col-auto pe-0">
                                 <img src="{{asset($item['image'])}}" style="width: auto; max-height: 65px;" class="objectfit-cover rounded-2" alt="">
                             </div>
                             <div class="col my-auto">
-                                <h6 class="m-0" style="color: #464646; font-size: 22px">{{$item['title']}}</h6>
+                                <h6 class="m-0" style="color: #464646; font-size: 18px">{{$item['title']}}</h6>
                             </div>
                         </div>
                     </div>
@@ -77,12 +77,12 @@
                         <p style="color: #464646; font-size: 16px;" class="ms-2 mb-0">Continue</p>  
                     </div>
                 </a>
-                </div>
+            </div>
             @endforeach
         </div>
     </div>
     <div class="profile-container col-5">
-        <div class="card mx-auto" style=" width: 50%">
+        <div class="card shadow mx-auto" style=" width: 50%">
             <div class="profile-image px-3">
                 <img src="{{asset('images/ryan-gosling.jpg')}}" class="card-img-top" alt="...">
             </div>
@@ -97,9 +97,9 @@
     <h3 style="width: 100%">Recommended For You</h3>
     <div class="owl-carousel owl-theme">
         @foreach ($course as $item)
-        <div class="card-wrapper">
-            <div class="card" style="width: 100%;">
-                <a href="">
+        <div class="card-wrapper mb-2">
+            <div class="card shadow" style="width: 100%;">
+                <a href="{{asset('/contentCourse')}}">
                     <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item['title'] }}</h5>

@@ -56,12 +56,13 @@
         }
 
         .title {
-            padding-top: 30px;
             font-weight: bold;
             color: rgb(78, 77, 77);
             margin: 0;
             width: 100%;
         }
+
+        /* Carousel */
 
         .card-wrapper {
             padding: 10px 20px;
@@ -92,7 +93,7 @@
         }
     </style>
 
-    <div class="header text-center p-3" style="background-image: linear-gradient(to right, #0861b4 , #011d38);">
+    <div class="header shadow text-center p-3" style="background-image: linear-gradient(to right, #0861b4 , #011d38);">
         <div class="sentence">
             <h1 class="text-light pt-4">Start your IT career here!</h1>
             <h5 class="text-light">Catch up many skills that you needed</h5>
@@ -105,12 +106,12 @@
             </form>
         </div>
     </div>
-    <div class="content">
-        <h3 class="title">What to learn</h3>
+    <div class="content mt-4">
+        <h3 class="title ps-3">What to learn</h3>
         <div class="owl-carousel owl-theme">
             @foreach ($course as $item)
                 <div class="card-wrapper">
-                    <div class="card item-card" style="width: 100%;">
+                    <div class="card shadow item-card" style="width: 100%;">
                         <a href="">
                             <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -125,11 +126,11 @@
                 </div>
             @endforeach
         </div>
-        <h3 class="title">Catch up the news</h3>
+        <h3 class="title ps-3">Catch up the news</h3>
         <div class="owl-carousel owl-theme">
             @foreach ($article as $item)
                 <div class="card-wrapper">
-                    <div class="card item" style="width: 100%;">
+                    <div class="card item shadow" style="width: 100%;">
                         <a href="">
                             <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
                             <div class="card-body">

@@ -266,34 +266,56 @@ Route::get('/cartPage', function () {
                 'category'=> 'Dasar Pemrograman',
                 'price'=> 15000,
             ],
-            [
-                "image"=> "https://i.ytimg.com/vi/vp5CsI0Qn28/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhFIEMoZTAP&rs=AOn4CLDaByNR5HxeBycZ8j9avVjzYPcbmQ",
-                'title'=> 'PHP',
-                'category'=> 'Pemrograman Web',
-                'price'=> 15000,
-            ],
-            [
-                "image"=> "https://i.ytimg.com/vi/JXXUBiJGu94/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDnQT-BNLIdmeglftGRJ5MEvP3oYQ",
-                'title'=> 'MongoDB',
-                'category'=> 'Database',
-                'price'=> 30000,
-            ],
-            [
-                "image"=> "https://i.ytimg.com/vi/LLT6EAtX-x8/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCZo1OcSY_YlnwOilz8fG9xkwitog",
-                'title'=> 'Javascript Async',
-                'category'=> 'Pemrograman Web',
-                'price'=> 25000,
-            ],
-            [
-                "image"=> "https://i.ytimg.com/vi/6dSNbskzlz4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLD5XF2jCeFVPBVadjrowmc25XjtZw",
-                'title'=> 'Kotlin',
-                'category'=> 'Mobile',
-                'price'=> 35000,
-            ],
-
         ],
     ]);
 });
 Route::get('/checkout', function () {
-    return view('userPage/checkoutPage');
+    return view('userPage/courses/checkoutPage');
+});
+Route::get('/contentCourse', function () {
+    return view('userPage/courses/contentCourse',[
+        'content'=>[
+                "video"=> '<iframe width="560" height="315" src="https://www.youtube.com/embed/wriGST3vp5M?si=a3CD6bb7kuzePJrW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                'title'=>'HTML Dasar',
+                'description'=>'HyperText Markup Language, or HTML, serves as the backbone of the World Wide Web. It is a simple yet powerful markup language designed to structure and present information on web pages. With HTML, you create the fundamental structure and layout for web content, facilitating consistent and accessible information presentation.',
+        ],
+        'thumbnails'=>[
+            "https://i.ytimg.com/vi/wriGST3vp5M/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCR8wCjPDJnuw1tE0M4-Cjcmc8pGQ",
+            "https://i.ytimg.com/vi/GAd6FTsGSY8/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBRz2gygdYL7-6zQ9nwzSiDd1Qc3w",
+            "https://i.ytimg.com/vi/TM12RA6cmOQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLB_bFuRWfLjO1ofFcpCe-lwUiUmoA"
+        ],
+        'asideTitles'=>[
+            'Apa itu HTML',
+            'Instalasi dan Persiapan',
+            'Struktur HTML'
+        ],
+        'userData'=>[
+            [
+                'id'=>'1',
+                'name'=>'Harrison Ford',
+                'quest'=>'Is HTML a programming language?',
+                'time'=>'2 days ago',
+                
+            ],
+            [
+                'id'=>'2',
+                'name'=>'Jason Statham',
+                'quest'=>'What is div used for?',
+                'time'=>'4 days ago'
+            ],
+            [
+                'id'=>'3',
+                'name'=>'Keanu Reeves',
+                'quest'=>'Damn son',
+                'time'=>'10 days ago'
+            ],
+            [
+                'id'=>'4',
+                'name'=>'Clint Eastwood',
+                'quest'=>'What is the best browser for web programming?',
+                'time'=>'1 month ago'
+            ],
+        ]
+
+    ]);
 });
