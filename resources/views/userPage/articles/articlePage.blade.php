@@ -13,7 +13,6 @@
             background: url('https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
             background-position: center center, center top;
             background-repeat: repeat, no-repeat;
-
         }
 
         .news-heading {

@@ -107,7 +107,35 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/admin',function(){
-    return view('adminPage/dashboardAdmin');
+    return view('adminPage/dashboardAdmin',[
+        'users'=>[
+            [
+                'name'=>'Ryan Gosling',
+                'username'=>'ryangosling',
+                'login'=>'12/02/2023 GMT+8 11:02:45',
+                'logout'=>'12/02/2023 GMT+8 12:02:50',
+                
+            ],
+            [
+                'name'=>'Keanu Reeves',
+                'username'=>'keanureeves',
+                'login'=>'12/02/2023 GMT+8 11:02:45',
+                'logout'=>'12/02/2023 GMT+8 12:02:50',
+            ],
+            [
+                'name'=>'Mike Tyson',
+                'username'=>'miketyson',
+                'login'=>'12/02/2023 GMT+8 11:02:45',
+                'logout'=>'12/02/2023 GMT+8 12:02:50',
+            ],
+            [
+                'name'=>'Charles Darwin',
+                'username'=>'charlesdarwin',
+                'login'=>'12/02/2023 GMT+8 11:02:45',
+                'logout'=>'12/02/2023 GMT+8 12:02:50',
+            ],
+        ]
+    ]);
 });
 Route::get('/signUp',function(){
     return view('/guestPage/signUpPage');
@@ -328,14 +356,13 @@ Route::get('/contentArticle', function () {
             [
             'gambar' => 'images/cyber-monday.jpg',
             'gambar2' => 'https://assets-global.website-files.com/62d577cf8d48796fc4c03527/64e3b3ba9cfc2ea4c1144d3a_gif1-fox-quco%20(1)%20(1)-min.gif',
-            'judul' => '🖥️ Komputer Kuantum Bukan Seperti yang Kalian Kira (Dan Bisa Bahaya)',
+            'judul' => '🖥️ Cyber Monday! IC3 menemukan Ransomware baru yang berbahaya',
             'isi' => 'Kalau denger kata “komputer kuantum”, apa sih yang muncul di pikiran kalian? Apa mungkin langsung kebayang komputer yang bisa bikin manusia mengecil, terus bisa jalan-jalan lintas waktu? 👀',
             'isi2' => ' Gak cuma di dunia fiksi, komputer kuantum sebenernya udah ada di dunia nyata. Perusahaan-perusahaan teknologi besar kayak Google, IBM, dan bahkan negara-negara besar kayak 🇨🇳 Tiongkok dan 🇺🇸 Amerika sekarang lagi berlomba-lomba untuk ngebangun komputer kuantum! Nggak percaya? Nih, denger sendiri dari CEO Google, Sundar Pichai:',
             'isi3' => '🗣️ Sundar Pichai intinya bilang: Potensi komputer kuantum sangatlah besar. Komputer kuantum ini bakalan jadi salah satu alat berharga untuk keberlangsungan perkembangan teknologi. Saya percaya bahwa kombinasi dari kecerdasan buatan (artificial intelligence, AI) dan (komputer) kuantum akan membantu kita menyelesaikan persoalan-persoalan besar di zaman modern.',
             'isi4' => 'Dan ya, jumlah investasi yang digelontorin ke bidang ini juga nggak main-main. Sampe 2,3 miliar dolar atau setara 35 triliun rupiah. 🤑 Duit segitu kalo dibeliin bakso… bisa buat ngasih makan hampir setengah penduduk dunia! 🌏 Belum lagi, jumlah ini diprediksi naik terus seiring kemajuan teknologi komputer kuantum.',
             'calender' => '22 Agustus',
-            'waktu' => '5 Menit Waktu Baca',
-            'deskripsi' => 'Komputer kuantum bakal segera jadi kenyataan. Namun ternyata, komputer kuantum yang sebenarnya jauh berbeda dari yang selama ini kita dengar...'
+            'deskripsi' => 'Komputer kuantum adalah teknologi yang dianggap sebagai terobosan besar dalam dunia komputasi. Mereka memiliki potensi untuk mengubah cara kita memproses dan menganalisis informasi.'
             ]
         ]
     ]);
