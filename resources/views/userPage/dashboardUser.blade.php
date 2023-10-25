@@ -100,8 +100,7 @@
     <div class="owl-carousel owl-theme">
         @foreach ($course as $item)
         <div class="card-wrapper mb-2">
-            <div class="card shadow" style="width: 100%;">
-                <a href="{{asset('/contentCourse')}}">
+            <div class="card shadow" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#modalBuy">
                     <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item['title'] }}</h5>
@@ -110,10 +109,23 @@
                     <div class="card-footer">
                         <p class="card-text">Buy: {{$item['price']}}</p>
                     </div>
-                </a>
             </div>
         </div>
         @endforeach
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"  style="max-width: 300px;">
+      <div class="modal-content">
+        <div class="modal-header bg-primary p-2">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body bg-body-tertiary rounded-bottom">
+            Successfully adding to your cart
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
