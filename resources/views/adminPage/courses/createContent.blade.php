@@ -1,9 +1,6 @@
 @extends('navbarAdmin')
 @section('content')
     <style>
-        .section-footer{
-            position: absolute;
-        }
         .form-content {
             margin: 20px;
             width: 100%;

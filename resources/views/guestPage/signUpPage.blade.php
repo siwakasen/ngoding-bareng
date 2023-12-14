@@ -59,10 +59,9 @@
                         <form id="registrationForm" action="{{ url('/login') }}" method="get">
                             <input type="text" name="name" id="name" placeholder="Name" required>
                             <input type="text" name="username" id="username" placeholder="Username" required>
+                            <input type="email" name="email" id="email" placeholder="Email" required>
                             <input type="password" name="password" id="password" placeholder="Password" required>
-                            <input type="password" name="retypePassword" id="retypePassword" placeholder="Re-type Password"
-                                required>
-
+                            <input type="password" name="retypePassword" id="retypePassword" placeholder="Re-type Password" required>
                             <div id="passwordError"></div>
                             <button type="sumbit" class="btn btn-primary fs-4">Sign Up</button>
                         </form>

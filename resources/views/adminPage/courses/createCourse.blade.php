@@ -5,6 +5,10 @@
             font-family: Arial, sans-serif;
         }
 
+        .section-footer {
+            position: absolute;
+        }
+
         .image-preview {
             width: 100%;
             height: 300px;
@@ -24,10 +28,11 @@
             display: flex;
             justify-content: flex-end;
         }
-        .create-course{
+
+        .create-course {
             max-width: 80%;
             margin: 0 auto;
-            margin-top:20px;
+            margin-top: 20px;
         }
     </style>
     <div class="create-course">
@@ -75,12 +80,12 @@
             </div>
             <div class="row g-3" style="margin-bottom: 15px;">
                 <div class="col-12 submit-button">
-                    <a href="{{asset('/createContent')}}">
+                    <a href="{{ asset('/createContent') }}">
                         <button type="button" class="btn btn-primary">Next</button>
                     </a>
                 </div>
             </div>
-    </form>
+        </form>
     </div>
 
     <script>
@@ -89,5 +94,4 @@
             image.getElementsByTagName('img')[0].src = URL.createObjectURL(event.target.files[0]);
         }
     </script>
-
 @endsection
