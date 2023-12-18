@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_admin')->constrained('admins')->references('id')->on('admins');
             $table->string('title');
             $table->string('thumbnail');
             $table->string('main_sentence');

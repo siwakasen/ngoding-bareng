@@ -22,12 +22,15 @@ class SignController extends Controller
 {
     public function index()
     {
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+            return response($user);
+            return redirect('admin/dashboard');
+        }
         if (Auth::check()) {
-            if(Auth::guard('admin')->check()){
-                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
-            }
             return redirect('dashboard');
         }
+
         $courses = Course::all();
         $articles = Article::all();
         $user = new User(['id' => null]);
@@ -35,27 +38,25 @@ class SignController extends Controller
     }
     public function signUp()
     {
-        if (Auth::check()) {
-            if(Auth::guard('admin')->check()){
-                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
-            }
-            return redirect('dashboard');
-        } else {
-            $user = new User(['id' => null]);
-            return view('guestPage.signUpPage', compact('user'));
+        if (Auth::guard('admin')->check()) {
+            return redirect('admin/dashboard');
         }
+        if (Auth::check()) {
+            return redirect('dashboard');
+        }
+        $user = new User(['id' => null]);
+        return view('guestPage.signUpPage', compact('user'));
     }
     public function login()
     {
-        if (Auth::check()) {
-            if(Auth::guard('admin')->check()){
-                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
-            }
-            return redirect('dashboard');
-        } else {
-            $user = new User(['id' => null]);
-            return view('guestPage.loginPage', compact('user'));
+        if (Auth::guard('admin')->check()) {
+            return redirect('admin/dashboard');
         }
+        if (Auth::check()) {
+            return redirect('dashboard');
+        }
+        $user = new User(['id' => null]);
+        return view('guestPage.loginPage', compact('user'));
     }
     public function actionSignup(Request $request)
     {
@@ -110,32 +111,35 @@ class SignController extends Controller
         }
     }
 
-    
+
     public function actionLogin(Request $request)
     {
-        $credentials = $request->only('username', 'password');   
-        if (Auth::guard('admin')->attempt($credentials)) { //login admin
-            return redirect('admin/dashboard'); 
-        }else{
-            if (Auth::attempt($credentials)) { //login user
-                $user = Auth::user();
-                if ($user->active) {
-                    return redirect('dashboard');
-                } else {
-                    Auth::logout();
-                    Session::flash('error', 'Your account is not active. Please check your email.');
-                    return redirect('login');
-                }
+        $credentials = $request->only('username', 'password');
+        
+        if (Auth::attempt($credentials)) { //login user
+            $user = Auth::user();
+            if ($user->active) {
+                return redirect('dashboard');
             } else {
-                Session::flash('error', 'Username or password might be wrong.');
+                Auth::logout();
+                Session::flash('error', 'Your account is not active. Please check your email.');
                 return redirect('login');
             }
         }
-
+        if (Auth::guard('admin')->attempt($credentials)) { //login admin
+            return redirect('admin/dashboard');
+        }
+        Session::flash('error', 'Username or password might be wrong.');
+        return redirect('login');
     }
     public function actionLogout()
     {
         Auth::logout();
+        return redirect('login');
+    }
+    public function actionLogoutAdmin()
+    {
+        Auth::guard('admin')->logout();
         return redirect('login');
     }
 }

@@ -11,18 +11,12 @@ class Course extends Model
     public $timestamps = false;
 
     protected $fillable =[
-        'id_admin',
         'id_category',
         'title',
         'thumbnail',
         'description',
         'price',
     ];
-
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class, 'id_admin');
-    }
     public function category()
     {
         return $this->belongsTo(Category::class, 'id_category');

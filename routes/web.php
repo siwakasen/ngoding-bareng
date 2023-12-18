@@ -21,33 +21,37 @@ use function PHPUnit\Framework\returnSelf;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [SignController::class,'index'])->name('/');
 
-Route::get('login',[SignController::class,'login'])->name('login');
-Route::post('actionLogin',[SignController::class,'actionLogin'])->name('actionLogin');
-Route::get('logout',[SignController::class,'actionLogout'])->name('logout')->middleware('auth');
+Route::get('/', [SignController::class, 'index'])->name('/');
 
-Route::get('signUp', [SignController::class,'signUp'])->name('signUp');
-Route::post('signup/action',[SignController::class,'actionSignup'])->name('actionSignup');
-Route::get('signup/verify/{verify_key}',[SignController::class,'verify'])->name('verify');
+Route::get('login', [SignController::class, 'login'])->name('login');
+Route::post('actionLogin', [SignController::class, 'actionLogin'])->name('actionLogin');
 
-Route::get('dashboard',[UserController::class,'index'])->name('dashboard')->middleware('auth');
-Route::get('profile',[UserController::class,'profile'])->name('profile')->middleware('auth');
-Route::post('edit_profile',[UserController::class,'update'])->name('edit_profile')->middleware('auth');
+Route::get('signUp', [SignController::class, 'signUp'])->name('signUp');
+Route::post('signup/action', [SignController::class, 'actionSignup'])->name('actionSignup');
+Route::get('signup/verify/{verify_key}', [SignController::class, 'verify'])->name('verify');
 
-Route::get('courses',[CourseController::class,'index'])->name('courses')->middleware('auth');
-Route::get('courses/search',[CourseController::class,'search'])->name('search')->middleware('auth');
-Route::get('courses/{id}',[CourseController::class,'show'])->name('show')->middleware('auth');
-Route::get('courses/filter/{id}',[CourseController::class,'filter'])->name('filter')->middleware('auth');
-Route::get('contentCourse/{id_course}/{id_content}',[ContentCourseController::class,'show'])->name('contentCourse')->middleware('auth');
 
-Route::post('addQuestion/{id_course}/{id_content}',[QuestionController::class,'store'])->name('addQuestion')->middleware('auth');
-Route::post('reply/{id_course}/{id_content}/{id_parent}',[QuestionController::class,'reply'])->name('reply')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('logout', [SignController::class, 'actionLogout'])->name('logout');
+    Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
+    Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('edit_profile', [UserController::class, 'update'])->name('edit_profile');
 
-Route::get('cartPage',[BracketController::class,'index'])->name('cartPage')->middleware('auth');
-Route::get('addItemToCart/{id_course}',[BracketController::class,'store'])->name('addItemToCart')->middleware('auth');
+    Route::get('courses', [CourseController::class, 'index'])->name('courses');
+    Route::get('courses/search', [CourseController::class, 'search'])->name('search');
+    Route::get('courses/{id}', [CourseController::class, 'show'])->name('show');
+    Route::get('courses/filter/{id}', [CourseController::class, 'filter'])->name('filter');
+
+    Route::get('contentCourse/{id_course}/{id_content}', [ContentCourseController::class, 'show'])->name('contentCourse');
+    Route::post('addQuestion/{id_course}/{id_content}', [QuestionController::class, 'store'])->name('addQuestion');
+    Route::post('reply/{id_course}/{id_content}/{id_parent}', [QuestionController::class, 'reply'])->name('reply');
+
+    Route::get('cartPage', [BracketController::class, 'index'])->name('cartPage');
+    Route::get('addItemToCart/{id_course}', [BracketController::class, 'store'])->name('addItemToCart');
+});
 
 Route::middleware(['auth:admin'])->group(function () {
-    //route admin taruh sini
-    
+    Route::get('admin/dashboard', [UserController::class, 'adminDashboard'])->name('adminDashboard');
+    Route::get('logoutAdmin', [SignController::class, 'actionLogoutAdmin'])->name('logoutAdmin');
 });
