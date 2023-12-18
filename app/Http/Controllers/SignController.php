@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Course;
 use App\Models\Article;
 use App\Mail\MailSend;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -111,27 +113,25 @@ class SignController extends Controller
     
     public function actionLogin(Request $request)
     {
-        $data = [
-            'username' => $request->input('username'),
-            'password' => $request->input('password'),
-        ];
-
-        if (Auth::attempt($data)) {
-            if(Auth::guard('admin')->check()){
-                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
-            }
-            $user = Auth::user();
-            if ($user->active) {
-                return redirect('dashboard');
+        $credentials = $request->only('username', 'password');   
+        if (Auth::guard('admin')->attempt($credentials)) { //login admin
+            return redirect('admin/dashboard'); 
+        }else{
+            if (Auth::attempt($credentials)) { //login user
+                $user = Auth::user();
+                if ($user->active) {
+                    return redirect('dashboard');
+                } else {
+                    Auth::logout();
+                    Session::flash('error', 'Your account is not active. Please check your email.');
+                    return redirect('login');
+                }
             } else {
-                Auth::logout();
-                Session::flash('error', 'Your account is not active. Please check your email.');
+                Session::flash('error', 'Username or password might be wrong.');
                 return redirect('login');
             }
-        } else {
-            Session::flash('error', 'Username or password might be wrong.');
-            return redirect('login');
         }
+
     }
     public function actionLogout()
     {
