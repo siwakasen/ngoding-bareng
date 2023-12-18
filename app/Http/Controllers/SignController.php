@@ -21,6 +21,9 @@ class SignController extends Controller
     public function index()
     {
         if (Auth::check()) {
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
+            }
             return redirect('dashboard');
         }
         $courses = Course::all();
@@ -31,6 +34,9 @@ class SignController extends Controller
     public function signUp()
     {
         if (Auth::check()) {
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
+            }
             return redirect('dashboard');
         } else {
             $user = new User(['id' => null]);
@@ -40,6 +46,9 @@ class SignController extends Controller
     public function login()
     {
         if (Auth::check()) {
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
+            }
             return redirect('dashboard');
         } else {
             $user = new User(['id' => null]);
@@ -108,6 +117,9 @@ class SignController extends Controller
         ];
 
         if (Auth::attempt($data)) {
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/dashboard'); //bagian ini bs diubah untuk dashboard admin
+            }
             $user = Auth::user();
             if ($user->active) {
                 return redirect('dashboard');
