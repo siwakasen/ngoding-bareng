@@ -5,6 +5,9 @@
             padding: 0;
             margin: 0;
         }
+        .container-content{
+            min-height: 100vh;
+        }
 
         .header {
             padding: 20px;
@@ -91,79 +94,74 @@
         }
     </style>
 
-
-    <div class="header">
-        <div class="title text-center text-white p-4 m-5">
-            <h1 style="font-size: 50px; overflow: hidden; max-height: 120px;" class="text-shadow">Learn Many Things Here</h1>
-            <div class="search-wrapper">
-                <form action="">
-                    <input type="text" placeholder="Search your favorit course here!" class="form-control">
-                    <button type="submit" class="search-button"><i
-                            class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
-                </form>
+    <div class="container-content">
+        <div class="header">
+            <div class="title text-center text-white p-4 m-5">
+                <h1 style="font-size: 50px; overflow: hidden; max-height: 120px;" class="text-shadow">Learn Many Things Here
+                </h1>
+                <div class="search-wrapper">
+                    <form action={{route('search')}}>
+                        @csrf
+                        <input type="text" name="search" placeholder="Search your favorit course here!" class="form-control">
+                        <button type="submit" class="search-button"><i
+                                class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="content pt-2" style="  margin: 0 20px">
-        <div class="button-filter">
-            <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary dropdown-toggle me-2  rounded-1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Category
-                </button>
-                <ul class="dropdown-menu">
-                    @foreach ($categories as $category)
-                        <li><a class="dropdown-item" href="#">{{ $category }}</a></li>
-                    @endforeach
-                </ul>
+        <div class="content pt-2" style="  margin: 0 20px">
+            <div class="button-filter">
+                <div class="btn-group ms-3">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle me-2  rounded-1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Category
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href={{route('courses')}}>All</a></li>
+                        @foreach ($categories as $category)
+                            <li><a class="dropdown-item"
+                                    href="{{ route('filter', ['id' => $category->id]) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary dropdown-toggle rounded-1" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Level
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Easy</a></li>
-                    <li><a class="dropdown-item" href="#">Medium</a></li>
-                    <li><a class="dropdown-item" href="#">Hard</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="group-course pt-3">
-            <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
-                @foreach ($course as $item)
-                    <div class="col">
-                        <div class="card-wrapper" style="max-width: 90%; margin: 0 auto;">
-                            <div class="card item-card" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#modalBuy">
-                                    <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
+            <div class="group-course pt-3">
+                <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
+                    @foreach ($courses as $item)
+                        <div class="col">
+                            <div class="card-wrapper" style="max-width: 90%; margin: 0 auto;">
+                                <div class="card item-card" style="width: 100%;" data-bs-toggle="modal"
+                                    data-bs-target="#modalBuy">
+                                    <img src="{{ asset($item['thumbnail']) }}" class="card-img-top" alt="...">
                                     <div class="card-body p-1">
                                         <h5 class="card-title" style="font-size: 18px;">{{ $item['title'] }}</h5>
-                                        <p class="card-text" style="font-size: 14px;">{{ $item['category'] }}</p>
+                                        <p class="card-text" style="font-size: 14px;">{{ $item->category->name }}</p>
                                     </div>
                                     <div class="card-footer ps-1">
                                         <p class="card-text">Buy: {{ $item['price'] }}</p>
                                     </div>
+                                </div>
                             </div>
                         </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 300px;">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary p-2">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                @endforeach
+                    <div class="modal-body bg-body-tertiary rounded-bottom">
+                        Successfully adding to your cart
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"  style="max-width: 300px;">
-      <div class="modal-content">
-        <div class="modal-header bg-primary p-2">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body bg-body-tertiary rounded-bottom">
-            Successfully adding to your cart
-        </div>
-      </div>
-    </div>
-  </div>
 @endsection

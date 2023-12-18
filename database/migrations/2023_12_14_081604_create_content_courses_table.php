@@ -16,7 +16,9 @@ return new class extends Migration
             $table->foreignId('id_course')->constrained('courses')->references('id')->on('courses')->onDelete('cascade');
             $table->integer('list_number');
             $table->string('name');
-            $table->string('link');
+            $table->string('link',500);
+            $table->string('description',1000);
+            $table->string('thumbnail');
         });
     }
 

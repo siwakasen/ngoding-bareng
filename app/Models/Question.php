@@ -13,6 +13,7 @@ class Question extends Model
     protected $fillable =[
         'id_user',
         'id_content',
+        'id_parent',
         'detail_question',
         'date',
     ];
@@ -24,5 +25,9 @@ class Question extends Model
     public function content()
     {
         return $this->belongsTo(ContentCourse::class, 'id_content');
+    }
+    public function replies()
+    {
+        return $this->hasMany(Question::class, 'id_parent')->with('replies');
     }
 }

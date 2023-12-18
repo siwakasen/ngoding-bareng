@@ -1,11 +1,11 @@
-
-@extends('navbarGuest')
+@extends('navbar')
 
 @section('content')
     <style>
-        .container-fluid{
+        .container-fluid {
             padding: 0;
         }
+
         .header {
             height: 250px;
             background-color: #0057a8;
@@ -109,14 +109,14 @@
     <div class="content mt-4">
         <h3 class="title ps-3">What to learn</h3>
         <div class="owl-carousel owl-theme">
-            @foreach ($course as $item)
+            @forelse ($courses as $item)
                 <div class="card-wrapper">
                     <div class="card shadow item-card" style="width: 100%;">
                         <a href="">
-                            <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
+                            <img src="{{ asset($item['thumbnail']) }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item['title'] }}</h5>
-                                <p class="card-text">{{ $item['category'] }}</p>
+                                <p class="card-text">{{ $item->category->name }}</p>
                             </div>
                             <div class="card-footer">
                                 <p class="card-text">Buy: {{ $item['price'] }}</p>
@@ -124,23 +124,27 @@
                         </a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div></div>
+            @endforelse
         </div>
         <h3 class="title ps-3">Catch up the news</h3>
         <div class="owl-carousel owl-theme">
-            @foreach ($article as $item)
+            @forelse ($articles as $item)
                 <div class="card-wrapper">
                     <div class="card item shadow" style="width: 100%;">
-                        <a href="">
-                            <img src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
+                        <a  href="">
+                            <img src="{{ asset($item['thumbnail']) }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item['title'] }}</h5>
-                                <p class="card-text" style="text-align: justify">{{ $item['description'] }}</p>
+                                <p class="card-text" style="text-align: justify">{{ $item['main_sentence'] }}</p>
                             </div>
                         </a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div></div>
+            @endforelse
         </div>
     </div>
 @endsection
