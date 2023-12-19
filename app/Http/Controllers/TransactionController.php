@@ -21,7 +21,7 @@ class TransactionController extends Controller
         if (!$bracket) {
             return redirect()->route('cartPage');
         }
-        return view('userPage.courses.checkoutpage', compact('user', 'bracket'));
+        return view('userPage.courses.checkoutPage', compact('user', 'bracket'));
     }
 
     /**
