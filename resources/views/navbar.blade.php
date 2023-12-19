@@ -50,7 +50,7 @@
                     <a href="{{ asset('/courses') }}" class="nav-link">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ asset('/articles') }}" class="nav-link">Articles</a>
+                    <a href="{{ route('article') }}" class="nav-link">Articles</a>
                 </li>
             </ul>
             @if ($user->id != null)
@@ -166,8 +166,9 @@
                             <a href="{{ asset('/courses') }}" class="nav-link">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ asset('/articles') }}"z class="nav-link">Articles</a>
-                        </li>
+    <a href="{{ route('article') }}" class="nav-link">Articles</a>
+</li>
+
                     </ul>
                     <hr>
                     <a href="" class="dropdown-item pe-5 pt-1">
@@ -191,7 +192,7 @@
                         <span class="ms-1">Help</span>
                     </a>
                     @if ($user->id != null)
-                        <a href="{{ asset('/logout') }}" class="dropdown-item pe-5 pt-1">
+                        <a href="{{ route('logout') }}" class="dropdown-item pe-5 pt-1">
                             <div class="icons">
                                 <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
                             </div>

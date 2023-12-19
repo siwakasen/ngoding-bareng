@@ -24,8 +24,8 @@ class SignController extends Controller
     {
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
-            return response($user);
-            return redirect('admin/dashboard');
+            // return response($user);
+            return redirect('adminPage/dashboardAdmin');
         }
         if (Auth::check()) {
             return redirect('dashboard');
@@ -50,7 +50,8 @@ class SignController extends Controller
     public function login()
     {
         if (Auth::guard('admin')->check()) {
-            return redirect('admin/dashboard');
+            $users = User::all();
+            return view('adminPage.dashboardAdmin', compact('users'));
         }
         if (Auth::check()) {
             return redirect('dashboard');
@@ -127,18 +128,21 @@ class SignController extends Controller
             }
         }
         if (Auth::guard('admin')->attempt($credentials)) { //login admin
-            return redirect('admin/dashboard');
+            return redirect('adminPage/dashboardAdmin');
         }
         Session::flash('error', 'Username or password might be wrong.');
         return redirect('login');
     }
     public function actionLogout()
     {
+        // dd("p");
         Auth::logout();
         return redirect('login');
     }
+
     public function actionLogoutAdmin()
     {
+        // dd("p");
         Auth::guard('admin')->logout();
         return redirect('login');
     }

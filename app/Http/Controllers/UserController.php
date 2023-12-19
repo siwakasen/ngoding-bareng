@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\User;
+use App\Models\Article;
 use App\Models\Bracket;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         //courses on cart
         $cart_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
@@ -42,6 +43,18 @@ class UserController extends Controller
         $user = Auth::user();
         return view('userPage.profilePage', compact('user'));
     }
+
+    public function manageArticle()
+    {
+        // Pengecekan apakah pengguna adalah admin
+        if (!Auth::guard('admin')->check()) {
+            abort(403, 'Unauthorized action.'); 
+        } 
+
+        $user = Auth::user();
+        $article = Article::all();
+        return view('adminPage.manageArticle', compact('user', 'article'));
+    } 
 
     /**
      * Update the specified resource in storage.

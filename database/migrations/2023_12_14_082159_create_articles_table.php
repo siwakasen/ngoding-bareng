@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('main_sentence');
             $table->string('content');
             $table->date('date');
+            $table->boolean('status');
         });
     }
 

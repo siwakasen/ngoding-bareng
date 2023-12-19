@@ -39,7 +39,7 @@
                     <a href="{{ asset('/manageCourse') }}" class="nav-link">Manage Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ asset('/manageArticle') }}" class="nav-link">Manage Articles</a>
+                    <a href="{{ route('adminManageArticle') }}" class="nav-link">Manage Articles</a>
                 </li>
             </ul>
             <div class="image-container">
