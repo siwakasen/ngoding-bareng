@@ -74,13 +74,13 @@
                         <label for="inputThumbnail" class="col-form-label">Thumbnail</label>
                     </div>
                     <div class="col-10">
-                        <input type="file" id="inputThumbnail" name="thumbnail" accept="image/*" class="form-control" onchange="previewThumbnail(event)">
-                        @if($mode == 'edit' && !empty($articles->thumbnail))
-                            <img src="{{ asset('/storage/thumbnail/' . $articles->thumbnail) }}" alt="Thumbnail Preview" style="max-width: 150px; margin-top: 10px;">
-                        @else
-                            <div id="imagePreview"><img src="" alt="Thumbnail Preview" style="max-width: 100px; margin-top: 10px;"></div>
-                        @endif
-                    </div>
+                    <input type="file" id="inputThumbnail" name="thumbnail" accept="image/*" class="form-control" onchange="previewThumbnail(event)">
+@if($mode == 'edit' && !empty($articles->thumbnail))
+    <img src="{{ asset('/storage/thumbnail/' . $articles->thumbnail) }}" alt="Thumbnail Preview" style="max-width: 150px; margin-top: 10px;">
+@else
+    <div id="imagePreview"><img src="" alt="Thumbnail Preview" style="max-width: 100px; margin-top: 10px;"></div>
+@endif
+
                 </div>
 
                 <div class="row g-3" style="margin-bottom: 15px;">

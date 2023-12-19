@@ -24,6 +24,7 @@ class ArticleController extends Controller
     {
         $user = auth()->user();
         $articles = Article::where('status', 0)->get();
+        // dd($articles);
         return view('userPage.articles.articlePage', compact('user', 'articles'));
     }
     
@@ -38,27 +39,34 @@ class ArticleController extends Controller
 
 
     public function store(Request $request)
-    {
-        $this->validate($request, [
-            'title' => 'required',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'main_sentence' => 'required',
-            'content' => 'required',
-        ]);
+{
+    $this->validate($request, [
+        'title' => 'required',
+        'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'main_sentence' => 'required',
+        'content' => 'required',
+    ]);
 
-        $data = $request->all();
+    $data = $request->all();
 
-        $article = new Article();
-        $this->handleImageUpload($request, $article);
-
-        // Tambahkan field 'date' dengan nilai waktu sekarang
-        $data['date'] = now();
-        $data['status'] = 0;
-        $article->fill($data);
-        $article->save();
-
-        return redirect()->route('adminManageArticle')->with('success', 'Data Berhasil Disimpan!');
+    if ($request->hasFile('thumbnail')) {
+        $thumbnail = $request->file('thumbnail');
+        $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
+        $destinationPath = public_path('/storage/thumbnail');
+        $thumbnail->move($destinationPath, $filename);
+        $data['thumbnail'] = $filename;
     }
+
+    // Tambahkan field 'date' dengan nilai waktu sekarang
+    $data['date'] = now();
+    $data['status'] = 0;
+
+    $article = new Article();
+    $article->fill($data);
+    $article->save();
+
+    return redirect()->route('adminManageArticle')->with('success', 'Data Berhasil Disimpan!');
+}
 
     
 
@@ -71,35 +79,37 @@ class ArticleController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'main_sentence' => 'required|string',
-            'content' => 'required|string',
-        ]);
-
-        $article = Article::findOrFail($id);
-        $this->handleImageUpload($request, $article);
-
-        $article->title = $request->input('title');
-        $article->main_sentence = $request->input('main_sentence');
-        $article->content = $request->input('content');
-        $article->save();
-
-        return redirect()->route('adminManageArticle')->with('success', 'Article updated successfully');
-    }
-    public function toggleStatus($id)
 {
-    $articles = Article::find($id);
-    
-    if ($articles) {
-        $newStatus = $article->status == 1 ? 0 : 1;
-        $article->update(['status' => $newStatus]);
-        return redirect()->route('adminManageArticle')->with('success', 'Article status updated!');
-    } else {
-        return redirect()->route('adminManageArticle')->with('error', 'Article not found!');
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'thumbnail' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        'main_sentence' => 'required|string',
+        'content' => 'required|string',
+    ]);
+
+    $article = Article::findOrFail($id);
+
+    $data = $request->all();
+
+    if ($request->hasFile('thumbnail')) {
+        $thumbnail = $request->file('thumbnail');
+        $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
+        $destinationPath = public_path('/storage/thumbnail');
+        $thumbnail->move($destinationPath, $filename);
+        $data['thumbnail'] = $filename;
+
+        // Remove the old thumbnail file if it exists
+        if (!empty($article->thumbnail)) {
+            $oldThumbnailPath = public_path('/storage/thumbnail/' . $article->thumbnail);
+            if (file_exists($oldThumbnailPath)) {
+                unlink($oldThumbnailPath);
+            }
+        }
     }
+
+    $article->update($data);
+
+    return redirect()->route('adminManageArticle')->with('success', 'Article updated successfully');
 }
 
 public function destroy($id)
@@ -131,13 +141,19 @@ public function formArticle($mode, $id = null)
 public function showDataById($id)
 {
     $article = Article::find($id);
+    $user = auth()->user(); 
 
     if ($article) {
-        return view('userPage.articles.contentArticlePage', compact('article'));
+        return view('userPage.articles.contentArticle', compact('article', 'user'));
     } else {
         return redirect()->route('userPage.articles.articlePage')->with('error', 'Article not found!');
     }
 }
 
+
+public static function isNotEmpty()
+{
+    return static::count() > 0;
+}
 
 }

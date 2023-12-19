@@ -1,112 +1,56 @@
 @extends('navbar')
 @section('content')
-    <!DOCTYPE html>
-    <html lang="en">
+    <style>
+        /* Add your custom styles here */
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>indexr</title>
-        <style>
-            .container-fluid{
-                padding: 0;
-            }
-            .container {
-                max-width: 100%;
-                padding: 0;
-                margin: 0;
-                text-align: center;
-            }
+        .article-details {
+            margin: 20px;
+        }
 
-            .left img {
-                width: 100%;
-                max-width: 100%;
-                height: 350px;
-            }
+        .article-details img {
+            max-width: 100%;
+            height: 100px;
+        }
 
-            .caption {
-                font-size: 50px;
-                font-weight: bold;
-                margin-top: 20px;
-            }
+        .article-details h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
 
-            .content-text {
-                text-align: left;
-                padding-left: 25%;
-                padding-right: 25%;
-                font-size: 25px
+        .article-details p {
+            font-size: 18px;
+            text-align: justify;
+        }
+
+        .article-details .waktu-jam {
+            margin-top: 10px;
+            color: #999;
+        }
+
+        /* Responsive styles for screens with a max width of 800px */
+        @media screen and (max-width: 800px) {
+            .article-details {
+                margin: 10px;
             }
 
-            .box1 {
-                text-align: center;
+            .article-details h1 {
+                font-size: 24px;
             }
 
-            .container-gif {
-                display: inline-block;
+            .article-details p {
+                font-size: 16px;
             }
+        }
+    </style>
 
-            .bawah-judul {
-                font-size: 15px;
-                color: #999;
-                padding-right: 5%;
-            }
-
-            .isi {
-                font-size: 20px;
-            }
-
-            @media screen and (max-width: 800px) {
-
-                .content-text {
-                    padding-left: 2%;
-                    padding-right: 2%;
-                }
-            }
-        </style>
-    </head>
-
-    <body>
-    <div class="container">
-        @forelse($article as $item)
-        <section class="content">
-            <div class="left">
-                <img class="img-fluid object-fit-cover" src="{{ asset('/storage/' . $item['thumbnail']) }}" alt="gambar atas">
-            </div>
-            <div class="content-text">
-    <div class="caption">
-        <h1><b>{{ $item['judul'] }}</b></h1>
-    </div>
-    <div class="bawah-judul" style="color: #999">
-        <p>{{ $item['deskripsi'] }}</p>
-        <div class="calender-waktu d-flex" style="color: #999">
-            <br>
-            <p style="margin-right: 15px;"><i class="fas fa-calendar"></i> {{ $item['calender'] }}</p>
+    <div class="article-details">
+        <img src="{{ asset('/storage/thumbnail/' . $article->thumbnail) }}" alt="Article Thumbnail" class="img-fluid">
+        <h1>{{ $article->title }}</h1>
+        <p>{{ $article->main_sentence }}</p>
+        <p>{{ $article->content }}</p>
+        <div class="waktu-jam">
+            <i class="far fa-calendar-alt"></i> {{ $article->date }}
         </div>
     </div>
-    <br>
-    <div class="isi" style="text-align: justify;">
-        <p>{{ $item['isi'] }}</p>
-        <div class="box1">
-            <div class="container-gif">
-                <p><img src="{{ asset('/storage/' . $item['gambar2']) }}" alt="gambar orang"></p>
-            </div>
-        </div>
-        <p>{{ $item['isi2'] }}</p>
-        <br>
-        <p>{{ $item['isi3'] }}</p>
-        <br>
-        <p>{{ $item['isi4'] }}</p>
-        <p>
-        <a href="{{ route('showArticleById', ['id' => $item['id']]) }}">Read More</a>
-        </p>
-    </div>
-</div>
-        </section>
-        @empty
-        <p>No Article found</p>
-        @endforelse
-    </div>
-</body>
 
-</html>
 @endsection
