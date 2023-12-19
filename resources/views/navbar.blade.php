@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ngoding Bareng</title>
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo.png') }}"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -22,6 +23,9 @@
         integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+    <script type="text/javascript"
+		src="https://app.stg.midtrans.com/snap/snap.js"
+    data-client-key="SB-Mid-client-MvWauyrNthHbE9IY"></script>
 </head>
 
 <body>
@@ -32,7 +36,7 @@
                     ngoding-bareng
                 </a>
             @else
-                <a href="{{ asset('/') }}" class="nav-link">
+                <a href="{{ asset('/') }}" class="nav-link" style="color: #0057a8">
                     ngoding-bareng
                 </a>
             @endif

@@ -16,6 +16,11 @@ class BracketController extends Controller
      */
     public function index()
     {
+        $unpaid_bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'pending')->first();
+        if ($unpaid_bracket) {
+            return redirect()->route('checkoutPage');
+        }
+
         $user = Auth::user();
         //retrieve all courses that put on cart
         $transactions = Transaction::whereHas('bracket', function ($query) use ($user) {
@@ -95,10 +100,12 @@ class BracketController extends Controller
         $bracket = Bracket::find($transaction->id_bracket);
         $bracket->total_price -= Course::find($transaction->id_course)->price;
         if($bracket->total_price < 0){
-
             $bracket->total_price = 0;
         }
         $bracket->save();
+        if($bracket->total_price == 0){
+            $bracket->delete();
+        }
         $transaction->delete();
         return redirect()->back();
     }

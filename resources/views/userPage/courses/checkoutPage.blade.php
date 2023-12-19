@@ -26,15 +26,14 @@
             <div class="col">
                 <h2 class="title">Checkout</h2>
             </div>
-            <div class="col text-end pt-2"><a href="{{ route('cartPage') }}" class="text-decoration-none">Cancel</a></div>
+            <div class="col text-end pt-2"><a href="{{ route('cancelCheckout') }}" class="text-decoration-none">Cancel</a></div>
         </div>
         <hr class="mt-0">
-        <form action="{{ route('checkout') }}" method="post"  id="checkoutForm">
-            @csrf
             <div class="payment row">
                 <div class="col">
                     <h4 class="title my-4">Payment Method</h4>
-                    <div class="accordion accordion-flush border" id="paymentMethod">
+                    <div id="snap-container"></div>
+                    {{-- <div class="accordion accordion-flush border" id="paymentMethod">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -144,7 +143,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col mt-4">
                     <div class="summary border p-3"style="margin: 0 auto; width:300px;">
@@ -154,12 +153,21 @@
                         <div class="">
                             <input type="hidden" name="id_bracket" value={{$bracket->id}}>
                             <p style="font-size: 12px; color: rgb(97, 97, 97)">By completing your purchase you agree to these Terms of Services</p>
-                            <button type="button" class="btn btn-primary" style="width: 100%;">Complete Checkout</button>
+                            <button id="pay-button" type="button" class="btn btn-primary" style="width: 100%;">Complete Checkout</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-
     </div>
+    <script type="text/javascript">
+        // For example trigger on button clicked, or any time you need
+        var payButton = document.getElementById('pay-button');
+        payButton.addEventListener('click', function () {
+          // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token.
+          // Also, use the embedId that you defined in the div above, here.
+          window.snap.embed('{{$bracket->snap_token}}', {
+            embedId: 'snap-container'
+          });
+        });
+      </script>
 @endsection

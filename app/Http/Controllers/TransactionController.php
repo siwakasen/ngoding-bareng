@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
+
 class TransactionController extends Controller
 {
     /**
@@ -16,8 +17,11 @@ class TransactionController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'ongoing')->first();
-        return view('userPage.courses.checkoutPage', compact('user','bracket'));
+        $bracket = Bracket::where('id_user', $user->id)->where('status', 'pending')->first();
+        if (!$bracket) {
+            return redirect()->route('cartPage');
+        }
+        return view('userPage.courses.checkoutpage', compact('user', 'bracket'));
     }
 
     /**
@@ -25,11 +29,34 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $bracket = Bracket::where('id_user', $request->id_bracket)->where('status', 'ongoing')->first();
-        $bracket->status = 'paid';
+        $bracket = Bracket::where('id', $request->id_bracket)->where('status', 'ongoing')->first();
+        $bracket->status = 'pending';
+        $user = Auth::user();
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+        \Midtrans\Config::$isSanitized = config('midtrans.isSanitized');
+        \Midtrans\Config::$is3ds = config('midtrans.is3ds');
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => $bracket->total_price,
+            ),
+            'customer_details' => array(
+                'first_name' => $user->name,
+                'last_name' => $user->username,
+                'email' => $user->email,
+                'phone' => $user->phone_number,
+            ),
+        );
+        // Your Midtrans API call
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $bracket->snap_token = $snapToken;
         $bracket->save();
-        toastr()->success('Checkout success');
-        return redirect()->route('dashboard');
+        return redirect()->route('checkoutPage');
     }
 
     /**
@@ -53,6 +80,11 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $user = Auth::user();
+        $bracket = Bracket::where('id_user', $user->id)->where('status', 'pending')->first();
+        $bracket->status = 'ongoing';
+        $bracket->snap_token = null;
+        $bracket->save();
+        return redirect()->route('cartPage');
     }
 }
