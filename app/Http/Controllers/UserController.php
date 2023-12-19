@@ -21,22 +21,21 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        //courses on cart
-        $cart_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
-            $query->where('id_user', $user->id)->where('status', 'ongoing');
-        })->get();
-        $total = 0;
-        foreach ($cart_courses as $course) {
-            $total += $course->price;
-        }
-        $courses = Course::whereNotIn('id', $cart_courses->pluck('id'))->get();
-
         //courses that user have
         $user_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
             $query->where('id_user', $user->id)->where('status', 'paid');
         })->get();
-        return view('userPage.dashboarduser', compact('courses', 'user', 'user_courses'));
+        //courses on cart
+        $cart_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
+            $query->where('id_user', $user->id)->where('status', 'ongoing');
+        })->get();
+
+        $courses = Course::whereNotIn('id', $cart_courses->pluck('id'))
+        ->whereNotIn('id', $user_courses->pluck('id'))
+        ->get();
+        return view('userPage.dashboardUser', compact('courses', 'user', 'user_courses'));
     }
+    
     public function profile()
     {
         $user = Auth::user();
@@ -84,7 +83,7 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $user = User::find($id);
         if ($request->image != null) {
-            if($user->image != null){
+            if ($user->image != null) {
                 unlink(storage_path('app/public/users/' . $user->image));
             }
             $uploadFolder = 'users';

@@ -115,10 +115,12 @@ class SignController extends Controller
     public function actionLogin(Request $request)
     {
         $credentials = $request->only('username', 'password');
-        
+
         if (Auth::attempt($credentials)) { //login user
             $user = Auth::user();
             if ($user->active) {
+                toastr()->success('Login success');
+
                 return redirect('dashboard');
             } else {
                 Auth::logout();
@@ -127,6 +129,7 @@ class SignController extends Controller
             }
         }
         if (Auth::guard('admin')->attempt($credentials)) { //login admin
+            toastr()->success('Login success');
             return redirect('admin/dashboard');
         }
         Session::flash('error', 'Username or password might be wrong.');

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Bracket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class TransactionController extends Controller
 {
@@ -12,7 +15,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'ongoing')->first();
+        return view('userPage.courses.checkoutPage', compact('user','bracket'));
     }
 
     /**
@@ -20,7 +25,11 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bracket = Bracket::where('id_user', $request->id_bracket)->where('status', 'ongoing')->first();
+        $bracket->status = 'paid';
+        $bracket->save();
+        toastr()->success('Checkout success');
+        return redirect()->route('dashboard');
     }
 
     /**
