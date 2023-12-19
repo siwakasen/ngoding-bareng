@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkoutPage', [TransactionController::class, 'index'])->name('checkoutPage');
     Route::post('checkout', [TransactionController::class, 'store'])->name('checkout');
     Route::get('cancelCheckout', [TransactionController::class, 'destroy'])->name('cancelCheckout');
-
+    Route::get('paymentSuccess',[TransactionController::class, 'paymentSuccess'])->name('paymentSuccess');
 
 });
 

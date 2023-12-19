@@ -21,7 +21,8 @@ class TransactionController extends Controller
         if (!$bracket) {
             return redirect()->route('cartPage');
         }
-        return view('userPage.courses.checkoutPage', compact('user', 'bracket'));
+        $transactions = Transaction::where('id_bracket', $bracket->id)->get();
+        return view('userPage.courses.checkoutPage', compact('user', 'bracket','transactions'));
     }
 
     /**
@@ -40,15 +41,15 @@ class TransactionController extends Controller
         \Midtrans\Config::$is3ds = config('midtrans.is3ds');
 
         $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => $bracket->total_price,
+            "transaction_details" => array(
+                "order_id" => rand(),
+                "gross_amount" => $bracket->total_price,
             ),
-            'customer_details' => array(
-                'first_name' => $user->name,
-                'last_name' => $user->username,
-                'email' => $user->email,
-                'phone' => $user->phone_number,
+            "customer_details" => array(
+                "first_name" => $user->name,
+                "last_name" => $user->username,
+                "email" => $user->email,
+                "phone" => $user->phone_number,
             ),
         );
         // Your Midtrans API call
@@ -57,6 +58,15 @@ class TransactionController extends Controller
         $bracket->snap_token = $snapToken;
         $bracket->save();
         return redirect()->route('checkoutPage');
+    }
+
+    public function paymentSuccess()
+    {
+        $user = Auth::user();
+        $bracket = Bracket::where('id_user', $user->id)->where('status', 'pending')->first();
+        $bracket->status = 'paid';
+        $bracket->save();
+        return redirect()->route('dashboard');
     }
 
     /**

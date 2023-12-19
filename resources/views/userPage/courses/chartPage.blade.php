@@ -148,10 +148,10 @@
                                 <input type="hidden" name="name">
                                 <input type="hidden" name="username">
                                 <input type="hidden" name="email">
-                                @if ($user->phone_number!=null)
+                                @if ($user->phone_number != null)
                                     <input type="hidden" name="phone_number" value={{ $user->phone_number }}>
                                 @endif
-                                <button type="submit" class="btn btn-primary btn-checkout">Checkout</button>
+                                <button id="checkout" type="submit" class="btn btn-primary btn-checkout">Checkout</button>
                             </form>
                         @endif
                     </div>
