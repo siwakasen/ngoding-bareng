@@ -16,10 +16,38 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        
+        $courses = collect([]);
         $categories = Category::all();
         $user = Auth::user();
-        return view('userPage.courses.coursePage', compact('courses', 'categories', 'user'));
+        //courses that user have
+        $user_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
+            $query->where('id_user', $user->id)->where('status', 'paid');
+        })->get();
+        foreach ($user_courses as $item) {
+            $item->stats = 'Owned';
+        }
+        $courses = $courses->merge($user_courses);
+
+
+        //courses on cart
+        $cart_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
+            $query->where('id_user', $user->id)->where('status', 'ongoing');
+        })->get();
+        foreach ($cart_courses as $item) {
+            $item->stats = 'On Cart';
+        }
+        $courses = $courses->merge($cart_courses);
+
+        //courses that user haven't buy or put on cart
+        $coursesNotBuy = Course::whereNotIn('id', $user_courses->pluck('id'))
+        ->whereNotIn('id', $cart_courses->pluck('id'))
+        ->get();
+        $courses = $courses->merge($coursesNotBuy);
+
+        //sort by id
+        $courses = $courses->sortBy('id')->values()->all();
+        return view('userPage.courses.coursePage', compact('courses', 'categories', 'user', 'user_courses', 'cart_courses'));
     }
 
     public function filter($id)

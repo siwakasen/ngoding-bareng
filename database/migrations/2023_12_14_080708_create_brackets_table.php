@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('id_user')->constrained('users')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('total_price');
             $table->string('status');
+            $table->string('snap_token')->nullable();
         });
     }
 

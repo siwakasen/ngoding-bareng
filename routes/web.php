@@ -7,6 +7,7 @@ use App\Http\Controllers\ContentCourseController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BracketController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 use function PHPUnit\Framework\returnSelf;
@@ -49,10 +50,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('cartPage', [BracketController::class, 'index'])->name('cartPage');
     Route::get('addItemToCart/{id_course}', [BracketController::class, 'store'])->name('addItemToCart');
+    Route::get('deleteCartItem/{id}', [BracketController::class, 'destroy'])->name('deleteCartItem');
+
+    Route::get('checkoutPage', [TransactionController::class, 'index'])->name('checkoutPage');
+    Route::post('checkout', [TransactionController::class, 'store'])->name('checkout');
+    Route::get('cancelCheckout', [TransactionController::class, 'destroy'])->name('cancelCheckout');
+    Route::get('paymentSuccess',[TransactionController::class, 'paymentSuccess'])->name('paymentSuccess');
+  
     Route::get('/contentArticle/{id}', [ArticleController::class, 'showDataById'])->name('showArticleById');
     Route::get('/articlePage', [ArticleController::class, 'articlePage'])->name('articlePage');
     Route::get('/articlePage', [ArticleController::class, 'index'])->name('article');
-
 
 });
 

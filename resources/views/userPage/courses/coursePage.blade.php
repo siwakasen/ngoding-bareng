@@ -5,7 +5,8 @@
             padding: 0;
             margin: 0;
         }
-        .container-content{
+
+        .container-content {
             min-height: 100vh;
         }
 
@@ -94,15 +95,16 @@
         }
     </style>
 
-    <div class="container-content">
+<div class="container-content">
         <div class="header">
             <div class="title text-center text-white p-4 m-5">
                 <h1 style="font-size: 50px; overflow: hidden; max-height: 120px;" class="text-shadow">Learn Many Things Here
                 </h1>
                 <div class="search-wrapper">
-                    <form action={{route('search')}}>
+                    <form action={{ route('search') }}>
                         @csrf
-                        <input type="text" name="search" placeholder="Search your favorit course here!" class="form-control">
+                        <input type="text" name="search" placeholder="Search your favorit course here!"
+                            class="form-control">
                         <button type="submit" class="search-button"><i
                                 class="fa-solid fa-magnifying-glass fa-xl me-2"></i></button>
                     </form>
@@ -118,7 +120,7 @@
                         Category
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href={{route('courses')}}>All</a></li>
+                        <li><a class="dropdown-item" href={{ route('courses') }}>All</a></li>
                         @foreach ($categories as $category)
                             <li><a class="dropdown-item"
                                     href="{{ route('filter', ['id' => $category->id]) }}">{{ $category->name }}</a></li>
@@ -131,37 +133,44 @@
                     @foreach ($courses as $item)
                         <div class="col">
                             <div class="card-wrapper" style="max-width: 90%; margin: 0 auto;">
-                                <div class="card item-card" style="width: 100%;" data-bs-toggle="modal"
-                                    data-bs-target="#modalBuy">
-                                    <img src="{{ asset($item['thumbnail']) }}" class="card-img-top" alt="...">
-                                    <div class="card-body p-1">
-                                        <h5 class="card-title" style="font-size: 18px;">{{ $item['title'] }}</h5>
-                                        <p class="card-text" style="font-size: 14px;">{{ $item->category->name }}</p>
+                                @if ($item->stats)
+                                    <div class="card item-card" style="width: 100%;">
+                                        <img src="{{ asset($item['thumbnail']) }}" class="card-img-top" alt="...">
+                                        <div class="card-body p-1">
+                                            <h5 class="card-title" style="font-size: 18px;">{{ $item['title'] }}</h5>
+                                            <p class="card-text" style="font-size: 14px;">{{ $item->category->name }}</p>
+                                        </div>
+                                        @if ($item->stats == 'Owned')
+                                            <div class="card-footer ps-1 bg-success text-white">
+                                                <p class="card-text">Owned</p>
+                                            </div>
+                                        @else
+                                            <div class="card-footer ps-1 bg-primary text-white">
+                                                <p class="card-text">On Cart</p>
+                                            </div>
+                                        @endif
                                     </div>
-                                    <div class="card-footer ps-1">
-                                        <p class="card-text">Buy: {{ $item['price'] }}</p>
-                                    </div>
-                                </div>
+                                @else
+                                    <a href="{{ route('addItemToCart', ['id_course' => $item->id]) }}">
+                                        <div class="card item-card" style="width: 100%;">
+                                            <img src="{{ asset($item['thumbnail']) }}" class="card-img-top" alt="...">
+                                            <div class="card-body p-1">
+                                                <h5 class="card-title" style="font-size: 18px;">{{ $item['title'] }}</h5>
+                                                <p class="card-text" style="font-size: 14px;">{{ $item->category->name }}
+                                                </p>
+                                            </div>
+                                            <div class="card-footer ps-1 bg-white">
+                                                <p class="card-text">Buy: {{ $item['price'] }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 300px;">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary p-2">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-body-tertiary rounded-bottom">
-                        Successfully adding to your cart
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-@endsection
+    @endsection
+<!-- Include Bootstrap JS and jQuery -->

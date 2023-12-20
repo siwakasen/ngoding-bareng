@@ -63,7 +63,7 @@
             transform: scale(105%);
         }
 
-        
+
 
         .card-title {
             margin: 0;
@@ -102,26 +102,25 @@
         <div class="content row">
             <div class="course-cart col-7 mb-2">
                 <p class="m-0">@php
-                    echo count($user_courses);
+                    echo count($transactions);
                 @endphp Courses in Cart</p>
                 <hr class="m-0">
-                @foreach ($user_courses as $item)
+                @foreach ($transactions as $trans)
                     <div class="card rounded-2 shadow mt-3 p-0">
                         <div class="card-body p-0">
                             <div class="row mb-0">
                                 <div class="col-auto pe-0">
-                                    <img src="{{ asset($item->thumbnail) }}" style="width: 170px; height: 100%;"
+                                    <img src="{{ asset($trans->course->thumbnail) }}" style="width: 170px; height: 100%;"
                                         class="objectfit-cover rounded-start-2" alt="">
                                 </div>
                                 <div class="col pe-0">
-                                    <h6 class="mt-2 fw-bold">{{ $item->title }}</h6>
-                                    <p style="font-size: 13px;">{{ $item->category->name }}</p>
-                                    <h6 class="fw-bold">IDR {{ number_format($item->price, 0, ',', '.') }}</h6>
+                                    <h6 class="mt-2 fw-bold">{{ $trans->course->title }}</h6>
+                                    <p style="font-size: 13px;">{{ $trans->course->category->name }}</p>
+                                    <h6 class="fw-bold">IDR {{ number_format($trans->course->price, 0, ',', '.') }}</h6>
                                 </div>
                                 <div class="col text-end p-1 pe-4">
                                     <ul>
-                                        <li><a href="">Move to wishlist</a></li>
-                                        <li><a href="">Remove</a></li>
+                                        <li><a href={{ route('deleteCartItem', ['id' => $trans->id]) }}>Remove</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -133,19 +132,33 @@
                 <div class="total-section">
                     <div class="total-wrapper">
                         <h4>Total:</h4>
-                        <h3 class="m-0 fs-1 fw-bold" style="width: 100%">IDR {{ number_format($total, 0, ',') }}</h3>
+                        <h3 class="m-0 fs-1 fw-bold" style="width: 100%">IDR
+                            {{ number_format($bracket->total_price ?? 0, 0, ',') }}</h3>
                     </div>
                     <hr class="mt-2">
+                    <p style="font-size: 12px; color: rgb(97, 97, 97)">By completing your purchase you agree to these Terms
+                        of Services</p>
                     <div class="button-wrapper">
-                        <a href="{{ asset('/checkout') }}">
-                            <button type="button" class="btn btn-primary btn-checkout">Checkout</button>
-                        </a>
+                        @if (!$bracket)
+                            <button type="submit" class="btn btn-primary btn-checkout" disabled>Checkout</button>
+                        @else
+                            <form action={{ route('checkout') }} method="post">
+                                @csrf
+                                <input type="hidden" name="id_bracket" value={{ $bracket->id ?? -1 }}>
+                                <input type="hidden" name="name">
+                                <input type="hidden" name="username">
+                                <input type="hidden" name="email">
+                                @if ($user->phone_number != null)
+                                    <input type="hidden" name="phone_number" value={{ $user->phone_number }}>
+                                @endif
+                                <button id="checkout" type="submit" class="btn btn-primary btn-checkout">Checkout</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
         <h3 class="fw-bold fs-4 mt-5" style="width: 100%;">You might also like</h3>
         @include('carousel')
-</div>
-
+    </div>
 @endsection

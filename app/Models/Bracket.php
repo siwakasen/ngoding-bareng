@@ -13,7 +13,8 @@ class Bracket extends Model
     protected $fillable =[
         'id_user',
         'total_price',
-        'status'
+        'status',
+        'snap_token'
     ];
 
     public function user()

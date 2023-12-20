@@ -16,17 +16,26 @@ class BracketController extends Controller
      */
     public function index()
     {
+        $unpaid_bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'pending')->first();
+        if ($unpaid_bracket) {
+            return redirect()->route('checkoutPage');
+        }
+
         $user = Auth::user();
-        $user_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
+        //retrieve all courses that put on cart
+        $transactions = Transaction::whereHas('bracket', function ($query) use ($user) {
             $query->where('id_user', $user->id)->where('status', 'ongoing');
         })->get();
-        $total = 0;
-        foreach ($user_courses as $course) {
-            $total += $course->price;
-        }
-        $courses = Course::whereNotIn('id', $user_courses->pluck('id'))->get();
-        session()->flash('cart_item_added', true);
-        return view('userPage.courses.chartPage', compact('user', 'user_courses', 'courses', 'total'));
+        //retrieve all courses that user already buy
+        $user_courses = Transaction::whereHas('bracket', function ($query) use ($user) {
+            $query->where('id_user', $user->id)->where('status', 'paid');
+        })->get();
+        $courses = Course::whereNotIn('id', $transactions->pluck('id_course'))
+        ->whereNotIn('id', $user_courses->pluck('id_course'))
+        ->get();
+        
+        $bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'ongoing')->first();
+        return view('userPage.courses.chartPage', compact('user', 'transactions', 'courses', 'bracket'));
     }
 
     /**
@@ -34,6 +43,7 @@ class BracketController extends Controller
      */
     public function store($id_course)
     {
+        toastr()->success('Item added to cart');
 
         $bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'ongoing')->first();
         if ($bracket) { //if bracket exists
@@ -59,6 +69,7 @@ class BracketController extends Controller
             'id_bracket' => $bracket->id,
             'date' => date('Y-m-d'),
         ]);
+
         $bracket->total_price += Course::find($id_course)->price;
         $bracket->save();
         return redirect()->back();
@@ -83,8 +94,19 @@ class BracketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bracket $bracket)
+    public function destroy($id)
     {
-        //
+        $transaction = Transaction::find($id);
+        $bracket = Bracket::find($transaction->id_bracket);
+        $bracket->total_price -= Course::find($transaction->id_course)->price;
+        if($bracket->total_price < 0){
+            $bracket->total_price = 0;
+        }
+        $bracket->save();
+        if($bracket->total_price == 0){
+            $bracket->delete();
+        }
+        $transaction->delete();
+        return redirect()->back();
     }
 }
