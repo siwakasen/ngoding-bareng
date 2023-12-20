@@ -11,149 +11,126 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      */
 
-     private function handleImageUpload(Request $request, $article = null)
-    {
-        if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('public/thumbnail');
-            $article->thumbnail = basename($thumbnailPath);
-        }
-    }
 
 
     public function index()
     {
         $user = auth()->user();
-        $articles = Article::where('status', 0)->get();
-        // dd($articles);
+        $articles = Article::where('status', 1)->get();
         return view('userPage.articles.articlePage', compact('user', 'articles'));
     }
-    
 
-    
+    public function showDataById($id)
+    {
+        $article = Article::find($id);
+        $user = auth()->user();
+
+        if ($article) {
+            return view('userPage.articles.contentArticle', compact('article', 'user'));
+        } else {
+            return redirect()->route('userPage.articles.articlePage')->with('error', 'Article not found!');
+        }
+    }
+
     public function create()
     {
-
         $articles = new Article();
-    return view('adminPage.courses.createArticle', compact('articles'));
+        return view('adminPage.createArticle', compact('articles'));
     }
 
 
     public function store(Request $request)
-{
-    $this->validate($request, [
-        'title' => 'required',
-        'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'main_sentence' => 'required',
-        'content' => 'required',
-    ]);
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'main_sentence' => 'required',
+            'content' => 'required',
+        ]);
 
-    $data = $request->all();
+        $data = $request->all();
 
-    if ($request->hasFile('thumbnail')) {
-        $thumbnail = $request->file('thumbnail');
-        $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
-        $destinationPath = public_path('/storage/thumbnail');
-        $thumbnail->move($destinationPath, $filename);
-        $data['thumbnail'] = $filename;
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/thumbnail');
+            $thumbnail->move($destinationPath, $filename);
+            $data['thumbnail'] = '/storage/thumbnail/' . $filename;
+        }
+
+        // Tambahkan field 'date' dengan nilai waktu sekarang
+        $data['date'] = now();
+        $data['status'] = 1;
+
+        $article = new Article();
+        $article->fill($data);
+        $article->save();
+        return redirect()->route('manageArticle')->with('success', 'Article created successfully');
     }
 
-    // Tambahkan field 'date' dengan nilai waktu sekarang
-    $data['date'] = now();
-    $data['status'] = 0;
+    public function toggleStatus($id)
+    {
+        $articles = Article::find($id);
 
-    $article = new Article();
-    $article->fill($data);
-    $article->save();
-
-    return redirect()->route('adminManageArticle')->with('success', 'Data Berhasil Disimpan!');
-}
-
-    
+        if ($articles) {
+            $newStatus = $articles->status == 1 ? 0 : 1;
+            $articles->update(['status' => $newStatus]);
+            return redirect()->route('manageArticle')->with('success', 'Article status updated!');
+        } else {
+            return redirect()->route('manageArticle')->with('error', 'Article not found!');
+        }
+    }
 
 
     public function edit($id)
     {
         $articles = Article::find($id);
-        $mode = 'edit'; 
-        return view('adminPage.courses.createArticle', compact('articles', 'mode'));
+        $mode = 'edit';
+        return view('adminPage.createArticle', compact('articles', 'mode'));
     }
 
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'thumbnail' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        'main_sentence' => 'required|string',
-        'content' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'main_sentence' => 'required|string',
+            'content' => 'required|string',
+        ]);
 
-    $article = Article::findOrFail($id);
+        $article = Article::findOrFail($id);
 
-    $data = $request->all();
+        $data = $request->all();
 
-    if ($request->hasFile('thumbnail')) {
-        $thumbnail = $request->file('thumbnail');
-        $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
-        $destinationPath = public_path('/storage/thumbnail');
-        $thumbnail->move($destinationPath, $filename);
-        $data['thumbnail'] = $filename;
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = time() . '.' . $thumbnail->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/thumbnail');
+            $thumbnail->move($destinationPath, $filename);
+            $data['thumbnail'] = '/storage/thumbnail/' . $filename;
 
-        // Remove the old thumbnail file if it exists
-        if (!empty($article->thumbnail)) {
-            $oldThumbnailPath = public_path('/storage/thumbnail/' . $article->thumbnail);
-            if (file_exists($oldThumbnailPath)) {
-                unlink($oldThumbnailPath);
+            // Remove the old thumbnail file if it exists
+            if (!empty($article->thumbnail)) {
+                $oldThumbnailPath = public_path('/storage/thumbnail/' . $article->thumbnail);
+                if (file_exists($oldThumbnailPath)) {
+                    unlink($oldThumbnailPath);
+                }
             }
         }
+
+        $article->update($data);
+        return redirect()->route('manageArticle')->with('success', 'Article updated successfully');
     }
 
-    $article->update($data);
+    public function destroy($id)
+    {
+        $articles = Article::find($id);
 
-    return redirect()->route('adminManageArticle')->with('success', 'Article updated successfully');
-}
-
-public function destroy($id)
-{
-    $articles = Article::find($id);
-
-    if ($articles) {
-        $articles->delete();
-        return redirect()->route('adminManageArticle')->with(['success' => 'Data Berhasil Dihapus!']);
-    } else {
-        return redirect()->route('adminManageArticle')->with(['error' => 'Data Not Found!']);
-    }
-}
-
-
-public function formArticle($mode, $id = null)
-{
-    // Mengecek apakah ada data artikel yang akan di-edit
-    $article = null;
-    if ($mode == 'edit') {
-        $article = Article::find($id);
-        if (!$article) {
-            return redirect()->route('adminManageArticle')->with('error', 'Article not found');
+        if ($articles) {
+            $articles->delete();
+            return redirect()->route('manageArticle')->with(['success' => 'Data Berhasil Dihapus!']);
+        } else {
+            return redirect()->route('manageArticle')->with(['error' => 'Data Not Found!']);
         }
     }
-    return view('adminPage.courses.createArticle', compact('mode', 'article'));
-}
-
-public function showDataById($id)
-{
-    $article = Article::find($id);
-    $user = auth()->user(); 
-
-    if ($article) {
-        return view('userPage.articles.contentArticle', compact('article', 'user'));
-    } else {
-        return redirect()->route('userPage.articles.articlePage')->with('error', 'Article not found!');
-    }
-}
-
-
-public static function isNotEmpty()
-{
-    return static::count() > 0;
-}
-
 }

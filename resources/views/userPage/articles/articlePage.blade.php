@@ -10,7 +10,7 @@
             padding: 50px;
             padding-bottom: 10px;
             text-align: center;
-            background: url('https://img.freepik.com/free-photo/beautiful-shining-stars-night-sky_181624-622.jpg?w=1380&t=st=1698241352~exp=1698241952~hmac=c85350f8fef2c7ba800318e963c5463b62b5af6df1b75a80f49175defce077df');
+            background: url('https://img.freepik.com/free-photo/low-angle-shot-mesmerizing-starry-sky_181624-27925.jpg?size=626&ext=jpg&ga=GA1.2.2022068520.1702984730&semt=sph');
             background-position: center center, center top;
             background-repeat: repeat, no-repeat;
         }
@@ -119,11 +119,11 @@
 <div class="divider"></div>
 <div class="news-main">
     <div class="news-sort row g-0">
-        <a href="{{ url('/news') }}" class="option px-4 col-auto py-2 pt-3 active">
+        <a href="{{ route('articles') }}" class="option px-4 col-auto py-2 pt-3 active">
             <i class="fa-regular fa-envelope fa-lg d-inline align-middle"></i>
             <div class="text d-inline align-middle">Latest</div>
         </a>
-        <a href="{{ url('/news/popular') }}" class="option px-4 col-auto py-2 pt-3">
+        <a href="" class="option px-4 col-auto py-2 pt-3">
             <i class="fa-solid fa-fire fa-lg d-inline align-middle"></i>
             <div class="text d-inline align-middle">Popular</div>
         </a>
@@ -131,10 +131,10 @@
     @foreach ($articles as $item)
         <div class="articles-container">
             <div class="news-article">
-                <a href="{{ url('/contentArticle/' . $item['id']) }}"> <!-- Add this line to create a link to contentArticle -->
+                <a href="{{ route('showArticleById',['id'=>$item['id']]) }}">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="{{ asset('/storage/thumbnail/' . $item['thumbnail']) }}" alt="Image"
+                            <img src="{{ asset( $item['thumbnail']) }}" alt="Image"
                                 class="img-fluid news-image object-fit-cover" style="height: 250px; width: 346px">
                         </div>
                         <div class="col-md-8">

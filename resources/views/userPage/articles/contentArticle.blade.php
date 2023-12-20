@@ -1,56 +1,94 @@
 @extends('navbar')
 @section('content')
     <style>
-        /* Add your custom styles here */
-
-        .article-details {
-            margin: 20px;
+        .container-fluid {
+            padding: 0;
         }
 
-        .article-details img {
+        .container {
             max-width: 100%;
-            height: 100px;
+            padding: 0;
+            margin: 0;
+            text-align: center;
         }
 
-        .article-details h1 {
-            font-size: 36px;
+        .image-banner{
+            background-image: url({{ $article->thumbnail }});
+            background-size: cover;
+            baground-repeat: no-repeat;
+            background-position: center center;
+            width: 100%;
+            max-width: 100%;
+            height: 450px;
+        }
+
+        .caption {
+            font-size: 50px;
             font-weight: bold;
+            margin-top: 20px;
         }
 
-        .article-details p {
-            font-size: 18px;
-            text-align: justify;
+        .content-text {
+            text-align: left;
+            padding-left: 25%;
+            padding-right: 25%;
+            font-size: 25px
         }
 
-        .article-details .waktu-jam {
-            margin-top: 10px;
+        .box1 {
+            text-align: center;
+        }
+
+        .container-gif {
+            display: inline-block;
+        }
+
+        .bawah-judul {
+            font-size: 15px;
             color: #999;
+            padding-right: 5%;
         }
 
-        /* Responsive styles for screens with a max width of 800px */
+        .image-content{
+            width: 100%;
+            max-width: 100%;
+            height: 450px;
+            
+        }
+
+        .isi {
+            font-size: 20px;
+        }
+
         @media screen and (max-width: 800px) {
-            .article-details {
-                margin: 10px;
-            }
 
-            .article-details h1 {
-                font-size: 24px;
-            }
-
-            .article-details p {
-                font-size: 16px;
+            .content-text {
+                padding-left: 2%;
+                padding-right: 2%;
             }
         }
     </style>
+    <div class="container">
+        <section class="content">
+            <div class="image-banner">
 
-    <div class="article-details">
-        <img src="{{ asset('/storage/thumbnail/' . $article->thumbnail) }}" alt="Article Thumbnail" class="img-fluid">
-        <h1>{{ $article->title }}</h1>
-        <p>{{ $article->main_sentence }}</p>
-        <p>{{ $article->content }}</p>
-        <div class="waktu-jam">
-            <i class="far fa-calendar-alt"></i> {{ $article->date }}
-        </div>
+            </div>
+            <div class="content-text">
+                <div class="caption">
+                    <h1><b>{{ $article->title }}</b></h1>
+                </div>
+                <div class="bawah-judul" style="color: #999">
+                    <p>{{ $article->main_sentence }}</p>
+                    <div class="calender-waktu d-flex" style="color: #999">
+                        <br>
+                        <p style="margin-right: 15px;"><i class="fas fa-calendar"></i> {{ $article->date }}</p>
+                    </div>
+                </div>
+                <br>
+                <div class="isi" style="text-align: justify;">
+                    <p>{!! nl2br($article->content) !!}</p>
+                </div>
+            </div>
+        </section>
     </div>
-
 @endsection

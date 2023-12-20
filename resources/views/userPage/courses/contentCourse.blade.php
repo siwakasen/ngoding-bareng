@@ -68,10 +68,16 @@
         <div class="row ms-4">
             <div class="col-8 video-content">
                 <div class="video objectfit-cover mt-4">
-                    @if (str_contains($content->link, ''))
+                    @if (str_contains($content->link, 'youtube'))
                         {!! $content['link'] !!}
                     @else
-                        <video src={{ asset($content->link) }}></video>
+                        <div class="video-container img-fluid">
+                            <video height="539"  frameborder="1"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen controls>
+                                <source src="{{ $content->link }}" type="video/mp4">
+                            </video>
+                        </div>
                     @endif
 
                 </div>
@@ -97,8 +103,8 @@
                             @csrf
                             <div class="profile col-auto" style="">
                                 @if ($user->id != null)
-                                    <img src="{{ asset('storage/users/' . $user->image) }}" alt=""
-                                        class="img-fluid rounded-pill" style="max-height: 45px; max-width: 45px;">
+                                    <img src="{{ asset($user->image) }}" alt="" class="img-fluid rounded-pill"
+                                        style="max-height: 45px; max-width: 45px;">
                                 @else
                                     <img src="{{ asset('images/kiwi.jpg') }}" alt="" class="img-fluid rounded-pill"
                                         style="max-height: 45px; max-width: 45px;">
@@ -124,7 +130,7 @@
                                         <img src="{{ asset('storage/images/kiwi.jpg') }}" alt=""
                                             class="img-fluid rounded-pill" style="max-height: 45px; max-width: 45px;">
                                     @else
-                                        <img src="{{ asset('/storage/users/' . $quest->user->image) }}" alt=""
+                                        <img src="{{ asset($quest->user->image) }}" alt=""
                                             class="img-fluid rounded-pill" style="max-height: 45px; max-width: 45px;">
                                     @endif
                                 </div>
@@ -137,15 +143,16 @@
                                         {{ $quest->detail_question }}
                                     </div>
                                     <div class="">
-                                        <form method="post" action={{route('reply', ['id_course' => $course->id, 'id_content' => $content->id, 'id_parent'=>$quest->id])}}>
+                                        <form method="post"
+                                            action={{ route('reply', ['id_course' => $course->id, 'id_content' => $content->id, 'id_parent' => $quest->id]) }}>
                                             @csrf
                                             <button type="button" class="btn btn-light" data-bs-toggle="collapse"
                                                 href="#{{ asset($quest['id']) }}" aria-expanded="false">Reply</button>
                                             <div class="collapse text-end row" id="{{ asset($quest['id']) }}">
                                                 <div class="profile col-auto pt-1" style="">
                                                     @if ($user->image != null)
-                                                        <img src="{{ asset('/storage/users/' . $user->image) }}"
-                                                            alt="" class="img-fluid rounded-pill"
+                                                        <img src="{{ asset($user->image) }}" alt=""
+                                                            class="img-fluid rounded-pill"
                                                             style="max-height: 35px; max-width: 35px;">
                                                     @else
                                                         <img src="{{ asset('/storage/images/kiwi.jpg') }}" alt=""
@@ -154,8 +161,8 @@
                                                     @endif
                                                 </div>
                                                 <p class="d-inline-flex gap-1 col p-0" style="width: 100%">
-                                                    <input class="form-control" placeholder="Add a reply..."
-                                                        type="text" name="questionInput" id="questionInput">
+                                                    <input class="form-control" placeholder="Add a reply..." type="text"
+                                                        name="questionInput" id="questionInput">
                                                 </p>
                                                 <div>
                                                     <button type="button" data-bs-toggle="collapse"
@@ -175,8 +182,8 @@
                                                         class="img-fluid rounded-pill"
                                                         style="max-height: 45px; max-width: 45px;">
                                                 @else
-                                                    <img src="{{ asset('/storage/users/' . $reply->user->image) }}"
-                                                        alt="" class="img-fluid rounded-pill"
+                                                    <img src="{{ asset($reply->user->image) }}" alt=""
+                                                        class="img-fluid rounded-pill"
                                                         style="max-height: 45px; max-width: 45px;">
                                                 @endif
                                             </div>
@@ -192,7 +199,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    
+
                                 </div>
                             </div>
                         @endforeach

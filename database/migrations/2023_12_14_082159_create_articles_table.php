@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('thumbnail');
             $table->string('main_sentence');
-            $table->string('content');
+            $table->longText('content');
             $table->date('date');
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
         });
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BracketController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 use function PHPUnit\Framework\returnSelf;
@@ -57,22 +58,42 @@ Route::middleware(['auth'])->group(function () {
     Route::get('cancelCheckout', [TransactionController::class, 'destroy'])->name('cancelCheckout');
     Route::get('paymentSuccess',[TransactionController::class, 'paymentSuccess'])->name('paymentSuccess');
   
-    Route::get('/contentArticle/{id}', [ArticleController::class, 'showDataById'])->name('showArticleById');
-    Route::get('/articlePage', [ArticleController::class, 'articlePage'])->name('articlePage');
-    Route::get('/articlePage', [ArticleController::class, 'index'])->name('article');
+    Route::get('contentArticle/{id}', [ArticleController::class, 'showDataById'])->name('showArticleById');
+    Route::get('articles', [ArticleController::class, 'index'])->name('articles');
 
 });
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('adminPage/dashboardAdmin', [SignController::class, 'actionLogin'])->name('adminDashboard');
+    Route::get('dashboardAdmin', [AdminController::class, 'index'])->name('dashboardAdmin');
     Route::get('logoutAdmin', [SignController::class, 'actionLogoutAdmin'])->name('logoutAdmin');
-    Route::get('adminPage/manageArticle', [UserController::class, 'manageArticle'])->name('adminManageArticle');
-    Route::get('adminPage/courses/createArticle', [ArticleController::class, 'create'])->name('createArticle');
-    Route::post('adminPage/courses/createArticle', [ArticleController::class, 'store'])->name('storeArticle');
-    Route::put('adminPage/manageArticle/toggleStatus/{id}', [ArticleController::class, 'toggleStatus'])->name('toggleStatusArticle');
-    Route::delete('adminPage/manageArticle/{id}', [ArticleController::class, 'destroy'])->name('destroyArticle');
-    Route::get('adminPage/manageArticle/{id}/edit', [ArticleController::class, 'edit'])->name('editArticle');
-    Route::put('adminPage/manageArticle/{id}', [ArticleController::class, 'update'])->name('updateArticle');
-    Route::get('adminPage/manageArticle/formArticle/{mode}/{id?}', [ArticleController::class, 'formArticle'])->name('formArticle');
+    
+    Route::get('manageArticle', [AdminController::class, 'manageArticle'])->name('manageArticle');
+    Route::put('toggleStatusArticle/{id}', [ArticleController::class, 'toggleStatus'])->name('toggleStatusArticle');
+    Route::delete('deleteArticle/{id}', [ArticleController::class, 'destroy'])->name('destroyArticle');
+    
+    Route::get('createArticle', [ArticleController::class, 'create'])->name('createArticle');
+    Route::post('storeArticle', [ArticleController::class, 'store'])->name('storeArticle');
+    
+    Route::get('editArticle/{id}', [ArticleController::class, 'edit'])->name('editArticle');
+    Route::put('updateArticle/{id}', [ArticleController::class, 'update'])->name('updateArticle');
+    
+    
+    Route::get('manageCourse', [AdminController::class, 'manageCourse'])->name('manageCourse');
+    Route::get('manageCourse/filter/{id}', [CourseController::class, 'filterAdmin'])->name('filterAdmin');
+    Route::put('toggleStatusCourse/{id}', [CourseController::class, 'toggleStatus'])->name('toggleStatusCourse');
+
+    Route::get('createCourse', [CourseController::class, 'create'])->name('createCourse');
+    Route::post('storeCourse', [CourseController::class, 'store'])->name('storeCourse');
+    
+    Route::get('editCourse/{id}', [CourseController::class, 'edit'])->name('editCourse');
+    Route::put('updateCourse', [CourseController::class, 'update'])->name('updateCourse');
+    Route::delete('deleteCourse/{id}', [CourseController::class, 'destroy'])->name('deleteCourse');
+
+    Route::get('createContent/{id_course}', [ContentCourseController::class, 'create'])->name('createContent');
+    Route::post('storeContent/{id_content}', [ContentCourseController::class, 'store'])->name('storeContent');
+    Route::post('createNewContent/{id_course}', [ContentCourseController::class, 'createNew'])->name('createNewContent');
+    Route::post('saveAllContent', [ContentCourseController::class, 'saveAllContent'])->name('saveAllContent');
+    Route::get('editContent/{id_course}/{id_content}', [ContentCourseController::class, 'showContentOnEdit'])->name('editContent');
+    Route::delete('deleteContent/{id}', [ContentCourseController::class, 'destroy'])->name('deleteContent');
 
 });

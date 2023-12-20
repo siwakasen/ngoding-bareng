@@ -65,7 +65,7 @@
             <div class="row g-0 flex-md-row flex-column">
                 <div class="col-md-auto d-flex align-items-center">
                     @if ($user->image != null)
-                        <img src="{{ asset('storage/users/' . $user->image) }}" class="img-fluid rounded-pill mx-auto d-block"
+                        <img src="{{ asset($user->image) }}" class="img-fluid rounded-pill mx-auto d-block"
                             alt="..." style="width:250px; ">
                     @else
                         <img src="{{ asset('storage/images/kiwi.jpg') }}" class="img-fluid rounded-pill mx-auto d-block"
@@ -122,7 +122,7 @@
                                 <div class="modal-body">
                                     <div class="image-preview">
                                         @if ($user->image != null)
-                                            <img src="{{ asset('storage/users/' . $user->image) }}" id="image-preview"
+                                            <img src="{{ asset($user->image) }}" id="image-preview"
                                                 class="img-fluid rounded-pill mx-auto d-block" alt="..."
                                                 style="max-height: 180px">
                                         @else
@@ -152,21 +152,6 @@
             </div>
         </div>
     </div>
-    @if (session('message'))
-        <div class="alert alert-success my-1">
-            {{ session('message') }}
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <div>{{ $errors->first() }}</div>
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger">
-            <div>{{ session('error') }}</div>
-        </div>
-    @endif
 
     <script>
 

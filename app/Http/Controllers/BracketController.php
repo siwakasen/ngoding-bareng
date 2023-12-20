@@ -31,7 +31,7 @@ class BracketController extends Controller
             $query->where('id_user', $user->id)->where('status', 'paid');
         })->get();
         $courses = Course::whereNotIn('id', $transactions->pluck('id_course'))
-        ->whereNotIn('id', $user_courses->pluck('id_course'))
+        ->whereNotIn('id', $user_courses->pluck('id_course'))->where('status',1)
         ->get();
         
         $bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'ongoing')->first();
@@ -43,8 +43,6 @@ class BracketController extends Controller
      */
     public function store($id_course)
     {
-        toastr()->success('Item added to cart');
-
         $bracket = Bracket::where('id_user', Auth::user()->id)->where('status', 'ongoing')->first();
         if ($bracket) { //if bracket exists
             $transaction = Transaction::create([
@@ -54,7 +52,7 @@ class BracketController extends Controller
             ]);
             $bracket->total_price += Course::find($id_course)->price;
             $bracket->save();
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Item added to cart');
         }
 
         //if bracket doesn't exist
@@ -72,7 +70,7 @@ class BracketController extends Controller
 
         $bracket->total_price += Course::find($id_course)->price;
         $bracket->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Item added to cart');
     }
 
     /**
@@ -107,6 +105,6 @@ class BracketController extends Controller
             $bracket->delete();
         }
         $transaction->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Item removed from cart');
     }
 }

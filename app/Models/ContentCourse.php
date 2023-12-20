@@ -14,6 +14,8 @@ class ContentCourse extends Model
         'id_course',
         'list_number',
         'name',
+        'description',
+        'thumbnail',
         'link',
     ];
 

@@ -25,7 +25,7 @@ class SignController extends Controller
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
             // return response($user);
-            return redirect('adminPage/dashboardAdmin');
+            return redirect('dashboardAdmin');
         }
         if (Auth::check()) {
             return redirect('dashboard');
@@ -50,8 +50,7 @@ class SignController extends Controller
     public function login()
     {
         if (Auth::guard('admin')->check()) {
-            $users = User::all();
-            return view('adminPage.dashboardAdmin', compact('users'));
+            return redirect('dashboardAdmin');
         }
         if (Auth::check()) {
             return redirect('dashboard');
@@ -116,13 +115,17 @@ class SignController extends Controller
     public function actionLogin(Request $request)
     {
         $credentials = $request->only('username', 'password');
-
-        if (Auth::attempt($credentials)) { //login user
+        $remember = $request->has('remember');
+        if (Auth::attempt($credentials, $remember)) { //login user
             $user = Auth::user();
             if ($user->active) {
-                toastr()->success('Login success');
-
-                return redirect('dashboard');
+                $userdb = User::find(Auth::user()->id);
+                $userdb->last_login = date('Y-m-d H:i:s');
+                if(!$remember){
+                    $userdb->remember_token = null;
+                }
+                $userdb->save();
+                return redirect('dashboard')->with('success', 'Login success');
             } else {
                 Auth::logout();
                 Session::flash('error', 'Your account is not active. Please check your email.');
@@ -130,22 +133,26 @@ class SignController extends Controller
             }
         }
         if (Auth::guard('admin')->attempt($credentials)) { //login admin
-          toastr()->success('Login success');
-          return redirect('adminPage/dashboardAdmin');  
+            return redirect('dashboardAdmin')->with('success', 'Login success');
         }
         Session::flash('error', 'Username or password might be wrong.');
         return redirect('login');
     }
     public function actionLogout()
     {
-        // dd("p");
+        $userdb = User::find(Auth::user()->id);
+        $userdb->last_logout = date('Y-m-d H:i:s');
+        $userdb->save();
         Auth::logout();
+        if($userdb->remember_token){
+        return redirect('login')->withInput(['username' => $userdb->username, 'password'=> $userdb, 'remember' => 'on']);
+            
+        }
         return redirect('login');
     }
 
     public function actionLogoutAdmin()
     {
-        // dd("p");
         Auth::guard('admin')->logout();
         return redirect('login');
     }

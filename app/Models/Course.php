@@ -14,8 +14,8 @@ class Course extends Model
         'id_category',
         'title',
         'thumbnail',
-        'description',
         'price',
+        'status'
     ];
     public function category()
     {

@@ -22,7 +22,7 @@ class TransactionController extends Controller
             return redirect()->route('cartPage');
         }
         $transactions = Transaction::where('id_bracket', $bracket->id)->get();
-        return view('userPage.courses.checkoutPage', compact('user', 'bracket','transactions'));
+        return view('userPage.courses.checkoutPage', compact('user', 'bracket', 'transactions'));
     }
 
     /**
@@ -33,18 +33,28 @@ class TransactionController extends Controller
         $bracket = Bracket::where('id', $request->id_bracket)->where('status', 'ongoing')->first();
         $bracket->status = 'pending';
         $user = Auth::user();
+        $transactions = Transaction::where('id_bracket', $bracket->id)->get();
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
         \Midtrans\Config::$isProduction = config('midtrans.isProduction');
         \Midtrans\Config::$isSanitized = config('midtrans.isSanitized');
         \Midtrans\Config::$is3ds = config('midtrans.is3ds');
-
+        $items = [];
+        foreach ($transactions as $transaction) {
+            $items[] = array(
+                'id' => $transaction->course->id,
+                'name' => $transaction->course->title,
+                'price' => $transaction->course->price,
+                'quantity' => 1,
+            );
+        }
         $params = array(
             "transaction_details" => array(
                 "order_id" => rand(),
                 "gross_amount" => $bracket->total_price,
             ),
+            "item_details" => $items,
             "customer_details" => array(
                 "first_name" => $user->name,
                 "last_name" => $user->username,
@@ -53,7 +63,12 @@ class TransactionController extends Controller
             ),
         );
         // Your Midtrans API call
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        try {
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+        } catch (\Exception $e) {
+            toastr()->error($e);
+            return redirect()->route('cartPage');
+        }
 
         $bracket->snap_token = $snapToken;
         $bracket->save();
@@ -66,7 +81,7 @@ class TransactionController extends Controller
         $bracket = Bracket::where('id_user', $user->id)->where('status', 'pending')->first();
         $bracket->status = 'paid';
         $bracket->save();
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success','Checkout success');
     }
 
     /**

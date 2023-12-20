@@ -23,7 +23,8 @@ return new class extends Migration
             $table->integer('active')->nullable();
             $table->string('image')->nullable();
             $table->rememberToken();
-
+            $table->datetime('last_login')->nullable();
+            $table->datetime('last_logout')->nullable();
         });
     }
 

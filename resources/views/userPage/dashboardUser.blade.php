@@ -104,7 +104,7 @@
                 <div class="card shadow mx-auto" style=" width: 50%">
                     <div class="profile-image px-3">
                         @if ($user->image != null)
-                            <img src="{{ asset('/storage/users/' . $user->image) }}" class="card-img-top" alt="...">
+                            <img src="{{ asset( $user->image) }}" class="card-img-top" alt="...">
                         @else
                             <img src="{{ asset('/storage/images/kiwi.jpg') }}" class="card-img-top" alt="...">
                         @endif
@@ -122,6 +122,7 @@
         </div>
         <div class="container-recommend py-5 px-3">
             <h3 style="width: 100%">Recommended For You</h3>
+            
             @include('carousel')
         </div>
     </div>

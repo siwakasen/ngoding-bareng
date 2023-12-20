@@ -47,46 +47,48 @@
             }
         }
     </style>
-        <div class="dashboard">
-            <h1>Dashboard</h1>
-            <hr>
-            <div class="box-container">
-                <div class="box" style="background-image: linear-gradient(to right, #037ae9 , #0160b9);">
-                    <h2>42</h2>
-                    <p>Guest Visitors</p>
-                </div>
-                <div class="box" style="background-image: linear-gradient(to right, #0160b9 , #003668);">
-                    <h2>15</h2>
-                    <p>Logged Users Online</p>
-                </div>
-                <div class="box b" style="background-image: linear-gradient(to right, #003668 , #00172c);">
-                    <h2>120</h2>
-                    <p>Registered Users</p>
-                </div>
+    <div class="dashboard">
+        <h1>Dashboard</h1>
+        <hr>
+        <div class="box-container">
+            <div class="box" style="background-image: linear-gradient(to right, #037ae9 , #0160b9);">
+                <h2>{{ $online_users }}</h2>
+                <p>Users Online</p>
             </div>
-            <hr>
-            <h2 class="title">Users</h2>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Username</th>
-                        <th></th>
-                        <th scope="col">Login time</th>
-                        <th scope="col">Logout time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $user)
-                        <tr>
-                            <td scope="row">{{ $user['name'] }}</td>
-                            <td>{{ $user['username'] }}</td>
-                            <td></td>
-                            <td>{{ $user['login'] }}</td>
-                            <td>{{ $user['logout'] }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="box" style="background-image: linear-gradient(to right, #0160b9 , #003668);">
+                <h2>{{ $logged_users }}</h2>
+                <p>Logged User</p>
+            </div>
+            <div class="box b" style="background-image: linear-gradient(to right, #003668 , #00172c);">
+                <h2>@php
+                    echo count($users);
+                @endphp</h2>
+                <p>Registered Users</p>
+            </div>
         </div>
+        <hr>
+        <h2 class="title">Users</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th></th>
+                    <th scope="col">Login time</th>
+                    <th scope="col">Logout time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <td scope="row">{{ $user['name'] }}</td>
+                        <td>{{ $user['username'] }}</td>
+                        <td></td>
+                        <td>{{ $user['last_login'] }}</td>
+                        <td>{{ $user['last_logout'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

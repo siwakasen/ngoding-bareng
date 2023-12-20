@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ngoding Bareng</title>
+    <link rel="icon" type="image/png" href="{{ asset('storage/images/logo.png') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,18 +34,18 @@
         <div class="container-fluid justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="{{ asset('/admin') }}" class="nav-link">Dashboard</a>
+                    <a href="{{ route('dashboardAdmin') }}" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ asset('/manageCourse') }}" class="nav-link">Manage Courses</a>
+                    <a href="{{ route('manageCourse') }}" class="nav-link">Manage Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('adminManageArticle') }}" class="nav-link">Manage Articles</a>
+                    <a href="{{ route('manageArticle') }}" class="nav-link">Manage Articles</a>
                 </li>
             </ul>
             <div class="image-container">
                 <a href="{{ asset('/profile') }}">
-                    <img src="{{ asset('images/kiwi.jpg') }}" alt="">
+                    <img src="{{ asset('storage/images/ryan-gosling.jpg') }}" alt="">
                 </a>
             </div>
             <div class="dropdown">
@@ -57,7 +58,7 @@
                         </div>
                         <span class="ms-1">Setting</span>
                     </a>
-                    <a href="{{ asset('/login') }}" class="dropdown-item pt-1">
+                    <a href="{{ route('logoutAdmin') }}" class="dropdown-item pt-1">
                         <div class="icons">
                             <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
                         </div>
@@ -84,7 +85,7 @@
                 </div>
                 <div class="image-container ps-4">
                     <a href="{{ asset('/profile') }}">
-                        <img src="{{ asset('images/ryan-gosling.jpg') }}" alt="">
+                        <img src="{{ asset('storage/images/ryan-gosling.jpg') }}" alt="">
                     </a>
                     <div class="side-text">
                         <span class="fw-bold">Hi, Ryan Gosling</span>
@@ -94,10 +95,10 @@
                 <div class="offcanvas-body p-4">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a href="{{ asset('/admin') }}" class="nav-link">Dashboard</a>
+                            <a href="{{ route('dashboardAdmin') }}" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ asset('/manageCourse') }}" class="nav-link">Manage Courses</a>
+                            <a href="{{ route('manageCourse') }}" class="nav-link">Manage Courses</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ asset('/manageArticle') }}" class="nav-link">Manage Articles</a>
@@ -122,7 +123,7 @@
                         </div>
                         <span class="ms-1">Help</span>
                     </a>
-                    <a href="{{ asset('/login') }}" class="dropdown-item pe-5 pt-1">
+                    <a href="{{ route('logoutAdmin') }}" class="dropdown-item pe-5 pt-1">
                         <div class="icons">
                             <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
                         </div>

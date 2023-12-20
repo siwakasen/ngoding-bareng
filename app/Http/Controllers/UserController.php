@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\User;
-use App\Models\Article;
-use App\Models\Bracket;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -25,7 +22,7 @@ class UserController extends Controller
         //courses that user have
         $user_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
             $query->where('id_user', $user->id)->where('status', 'paid');
-        })->get();
+        })->where('status',1)->get();
         //courses on cart
         $cart_courses = Course::whereHas('transaction.bracket', function ($query) use ($user) {
             $query->where('id_user', $user->id)->where('status', 'ongoing');
@@ -33,6 +30,7 @@ class UserController extends Controller
 
         $courses = Course::whereNotIn('id', $cart_courses->pluck('id'))
         ->whereNotIn('id', $user_courses->pluck('id'))
+        ->where('status',1)
         ->get();
         return view('userPage.dashboardUser', compact('courses', 'user', 'user_courses'));
     }
@@ -42,18 +40,6 @@ class UserController extends Controller
         $user = Auth::user();
         return view('userPage.profilePage', compact('user'));
     }
-
-    public function manageArticle()
-    {
-        // Pengecekan apakah pengguna adalah admin
-        if (!Auth::guard('admin')->check()) {
-            abort(403, 'Unauthorized action.'); 
-        } 
-
-        $user = Auth::user();
-        $article = Article::all();
-        return view('adminPage.manageArticle', compact('user', 'article'));
-    } 
 
     /**
      * Update the specified resource in storage.
@@ -97,14 +83,14 @@ class UserController extends Controller
         $user = User::find($id);
         if ($request->image != null) {
             if ($user->image != null) {
-                unlink(storage_path('app/public/users/' . $user->image));
+                unlink($user->image);
             }
             $uploadFolder = 'users';
             $image = $request->file('image');
             $image_uploaded_path = $image->store($uploadFolder, 'public');
             $uploadedImageResponse = basename($image_uploaded_path);
 
-            $user->image = $uploadedImageResponse;
+            $user->image = 'storage/users/' . $uploadedImageResponse;
         }
 
         $user->update([

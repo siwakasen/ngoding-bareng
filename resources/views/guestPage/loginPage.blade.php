@@ -37,7 +37,7 @@
                                     @endif
                                     <div class="form-floating mb-2">
                                         <input type="text" class="form-control" id="floatingInput" name="username"
-                                            placeholder="Username" required />
+                                            placeholder="Username" required value="{{old('username')}}" />
                                         <label for="floatingInput">Username</label>
                                     </div>
                                     <!-- Password -->
@@ -48,8 +48,8 @@
                                     </div>
                                     <!-- Remember me -->
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                                            name="remember" checked>
+                                        <input class="form-check-input" type="checkbox" value="{{old('remember')}}" id="flexCheckChecked"
+                                            name="remember" checked >
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Remember Me
                                         </label>

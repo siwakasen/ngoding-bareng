@@ -31,7 +31,7 @@ class QuestionController extends Controller
             'detail_question' => $data['questionInput'],
             'date' => date('Y-m-d'),
         ]);
-        return redirect('contentCourse/' . $id_course . '/' . $id_content);
+        return redirect('contentCourse/' . $id_course . '/' . $id_content)->with('success', 'Question posted');
     }
 
     public function reply(Request $request, $id_course, $id_content, $id_parent)
@@ -47,7 +47,7 @@ class QuestionController extends Controller
             'detail_question' => $data['questionInput'],
             'date' => date('Y-m-d'),
         ]);
-        return redirect('contentCourse/' . $id_course . '/' . $id_content);
+        return redirect('contentCourse/' . $id_course . '/' . $id_content)->with('success', 'Reply posted');
     }
 
     
