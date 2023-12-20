@@ -11,11 +11,13 @@ class Article extends Model
     public $timestamps = false;
 
     protected $fillable =[
+        'id',
         'title',
         'thumbnail',
         'main_sentence',
         'content',
-        'date'
+        'date',
+        'status',
     ];
     
 }

@@ -31,18 +31,15 @@
             max-height: 200px;
         }
 
-
         /* content articles */
         .news-main {
             margin: 0 260px;
         }
 
-        
-
         .divider {
             width: 100%;
             height: 20px;
-            box-shadow: 0 5px 5px rgb(153, 152, 152)inset;
+            box-shadow: 0 5px 5px rgb(153, 152, 152) inset;
             background-color: #ddd;
         }
 
@@ -80,10 +77,12 @@
             text-decoration: none;
             color: #333333;
         }
-        .news-article .row:hover{
+
+        .news-article .row:hover {
             color: #9c9898;
             filter: opacity(80%);
         }
+
         @media screen and (max-width: 1100px) {
             .news-head {
                 max-width: 100%;
@@ -96,7 +95,7 @@
             }
 
             .news-heading p {
-                max-width: 100% ;
+                max-width: 100%;
                 text-align: justify;
                 max-height: 200px;
             }
@@ -108,53 +107,57 @@
         }
     </style>
     <div class="news-head z-1">
-        <div class="news-heading text-light">
-            <h2>Read all news</h2>
-            <h2>about technology</h2>
-            <p class="overflow-y-hidden">Welcome to the forefront of technology and innovation, where every line of code
-                shapes the future. In
-                this ever-evolving world of programming, we explore the latest trends, breakthroughs, and fascinating
-                developments that are shaping the digital landscape. From AI-driven code generators to revolutionary
-                programming languages, stay informed with our curated technology news.</p>
-        </div>
+    <div class="news-heading text-light">
+        <h2>Read all news</h2>
+        <h2>about technology</h2>
+        <p class="overflow-y-hidden">Welcome to the forefront of technology and innovation, where every line of code
+            shapes the future. In this ever-evolving world of programming, we explore the latest trends, breakthroughs,
+            and fascinating developments that are shaping the digital landscape. From AI-driven code generators to
+            revolutionary programming languages, stay informed with our curated technology news.</p>
     </div>
-    <div class="divider">
+</div>
+<div class="divider"></div>
+<div class="news-main">
+    <div class="news-sort row g-0">
+        <a href="{{ url('/news') }}" class="option px-4 col-auto py-2 pt-3 active">
+            <i class="fa-regular fa-envelope fa-lg d-inline align-middle"></i>
+            <div class="text d-inline align-middle">Latest</div>
+        </a>
+        <a href="{{ url('/news/popular') }}" class="option px-4 col-auto py-2 pt-3">
+            <i class="fa-solid fa-fire fa-lg d-inline align-middle"></i>
+            <div class="text d-inline align-middle">Popular</div>
+        </a>
     </div>
-    <div class="news-main">
-        <div class="news-sort row g-0 ">
-            <a href="" class="option px-4 col-auto py-2 pt-3 active">
-                <i class="fa-regular fa-envelope fa-lg d-inline align-middle"></i>
-                <div class="text d-inline align-middle">Latest</div>
-            </a>
-            <a href="" class="option px-4 col-auto py-2 pt-3">
-                <i class="fa-solid fa-fire fa-lg d-inline align-middle"></i>
-                <div class="text d-inline align-middle">Popular</div>
-            </a>
-        </div>
-        @foreach ($isiArticlePage as $item)
-            <div class="articles-container">
-                <div class="news-article">
-                    <a href="{{ url('contentArticle') }}">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="{{ $item['gambarArticle'] }}" alt="Image" class="img-fluid news-image object-fit-cover"
-                                    style="height: 200px; width: 346px">
+    @foreach ($articles as $item)
+        <div class="articles-container">
+            <div class="news-article">
+                <a href="{{ url('/contentArticle/' . $item['id']) }}"> <!-- Add this line to create a link to contentArticle -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ asset('/storage/thumbnail/' . $item['thumbnail']) }}" alt="Image"
+                                class="img-fluid news-image object-fit-cover" style="height: 250px; width: 346px">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="news-title">
+                                <h4 style="font-weight: bold">{{ $item['jArticle'] }}</h4>
                             </div>
-                            <div class="col-md-8">
-                                <div class="news-title">
-                                    <h4 style="font-weight: bold">{{ $item['jArticle'] }}</h4>
-                                </div>
-                                <div class="news-info">
-                                    {{ $item['desArticle'] }}
-                                </div>
-                                <div class="waktu-jam">
-                                    <i class="far fa-calendar-alt"></i> {{ $item['jamArticle'] }}
-                                </div>
+                            <div class="news-info">
+                                {{ $item['desArticle'] }}
+                            </div>
+                            <div class="title">
+                                <h2>{{ $item['title'] }}</h2>
+                            </div>
+                            <div class="main-sentence">
+                                <p>{{ $item['main_sentence'] }}</p>
+                            </div>
+                            <div class="waktu-jam">
+                                <i class="far fa-calendar-alt"></i> {{ $item['date'] }}
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </div>
-        @endforeach
-    </div>
+        </div>
+    @endforeach
+</div>
 @endsection

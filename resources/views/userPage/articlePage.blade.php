@@ -86,52 +86,32 @@
 
     <div class="box-container">
         <div class="button-container">
-        <div class="box">
-    <p>{{ count($article) }} Articles</p>
-</div>
-        </div>
-        <div class="add-new-article">
-            <a href="{{ route('createArticle') }}" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                    class="bi bi-file-plus" viewBox="0 0 16 16">
-                </svg> Add New Article</a>
+            <div class="box">
+                <p>{{ count($articles) }} Articles</p>
+            </div>
         </div>
     </div>
 
-    @foreach($article as $artikel)
+    @foreach($articles as $article)
+    @if($article['status'] == 0)
     <div class="card mt-5">
         <div class="card-body">
             <div class="thumbnail">
-            <img src="{{ asset('storage/thumbnail/' . $artikel->thumbnail) }}" alt="Thumbnail Preview" style="max-width: 200px; max-height: 200px; margin-top: 10px;">
+                <img src="{{ asset('thumbnail/' . $article['thumbnail']) }}" alt="thumbnail">
                 <div class="text-content">
                     <div class="card-title">
-                        <h2>{{ $artikel['title'] }}</h2>
+                        <h2>{{ $article['title'] }}</h2>
                         <div class="buttons">
-                        <form action="{{ route('toggleStatusArticle', ['id' => $artikel['id']]) }}" method="post">
-    @csrf
-    @method('put')
-    @if ($artikel['status'] == 1)
-        <button type="submit" class="btn btn-success me-1">Unhide</button>
-    @else
-        <button type="submit" class="btn btn-primary me-1">Hide</button>
-    @endif
-</form>
-
-<a href="{{ route('editArticle', ['id' => $artikel['id']]) }}" class="btn btn-warning me-1">Edit</a>
-
-<form action="{{ route('destroyArticle', ['id' => $artikel['id']]) }}" method="post">
-    @csrf
-    @method('delete')
-    <button type="submit" class="btn btn-danger">Delete</button>
-</form>
-
-</div>
+                            <!-- Tambahkan tombol untuk melihat detail artikel jika dibutuhkan -->
+                        </div>
                     </div>
-                    <p>{{ $artikel['main_sentence'] }}</p>
+                    <p>{{ $article['main_sentence'] }}</p>
                 </div>
             </div>
             <hr style="margin-top: 30px;">
         </div>
     </div>
+    @endif
     @endforeach
 </div>
 
