@@ -82,12 +82,6 @@
                 <a class="navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false"><i class=" fa-solid fa-bars fa-xl"></i></a>
                 <div class="dropdown-menu dropdown-menu-end mt-4 me-3">
-                    <a href="" class="dropdown-item pt-1">
-                        <div class="icons">
-                            <i class="fa-solid fa-gear fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Setting</span>
-                    </a>
                     @if ($user->id != null)
                         <a href="{{ asset('/cartPage') }}" class="dropdown-item pt-1">
                             <div class="icons">
@@ -97,12 +91,6 @@
                             <span class="ms-1 me-2">My Cart</span>
                         </a>
                     @endif
-                    <a href="" class="dropdown-item pt-1">
-                        <div class="icons">
-                            <i class="fa-regular fa-circle-question fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Help</span>
-                    </a>
                     @if ($user->id != null)
                         <a href="{{ asset('/logout') }}" class="dropdown-item pt-1">
                             <div class="icons">
@@ -176,12 +164,6 @@
 
                     </ul>
                     <hr>
-                    <a href="" class="dropdown-item pe-5 pt-1">
-                        <div class="icons">
-                            <i class="fa-solid fa-gear fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Setting</span>
-                    </a>
                     @if ($user->id != null)
                         <a href="{{ asset('/cartPage') }}" class="dropdown-item pe-5 pt-1">
                             <div class="icons">
@@ -190,12 +172,6 @@
                             <span class="ms-1 me-2">My Cart</span>
                         </a>
                     @endif
-                    <a href="" class="dropdown-item pe-5 pt-1">
-                        <div class="icons">
-                            <i class="fa-regular fa-circle-question fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Help</span>
-                    </a>
                     @if ($user->id != null)
                         <a href="{{ route('logout') }}" class="dropdown-item pe-5 pt-1">
                             <div class="icons">

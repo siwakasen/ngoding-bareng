@@ -52,12 +52,6 @@
                 <a class="navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false"><i class=" fa-solid fa-bars fa-xl"></i></a>
                 <div class="dropdown-menu dropdown-menu-end mt-4">
-                    <a href="" class="dropdown-item pt-1">
-                        <div class="icons">
-                            <i class="fa-solid fa-gear fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Setting</span>
-                    </a>
                     <a href="{{ route('logoutAdmin') }}" class="dropdown-item pt-1">
                         <div class="icons">
                             <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
@@ -105,23 +99,11 @@
                         </li>
                     </ul>
                     <hr>
-                    <a href="" class="dropdown-item pe-5 pt-1">
-                        <div class="icons">
-                            <i class="fa-solid fa-gear fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Setting</span>
-                    </a>
                     <a href="{{ asset('/cartPage') }}" class="dropdown-item pe-5 pt-1">
                         <div class="icons">
                             <i class="fa-solid fa-cart-shopping fa-lg"></i>
                         </div>
                         <span class="ms-1">My Cart</span>
-                    </a>
-                    <a href="" class="dropdown-item pe-5 pt-1">
-                        <div class="icons">
-                            <i class="fa-regular fa-circle-question fa-lg"></i>
-                        </div>
-                        <span class="ms-1">Help</span>
                     </a>
                     <a href="{{ route('logoutAdmin') }}" class="dropdown-item pe-5 pt-1">
                         <div class="icons">

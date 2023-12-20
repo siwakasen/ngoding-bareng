@@ -17,7 +17,16 @@ class ArticleController extends Controller
     {
         $user = auth()->user();
         $articles = Article::where('status', 1)->get();
-        return view('userPage.articles.articlePage', compact('user', 'articles'));
+        $activePop = false;
+        return view('userPage.articles.articlePage', compact('user', 'articles', 'activePop'));
+    }
+
+    public function indexPopular()
+    {
+        $user = auth()->user();
+        $articles = Article::where('status', 1)->orderBy('content','ASC')->get();
+        $activePop = true;
+        return view('userPage.articles.articlePage', compact('user', 'articles', 'activePop'));
     }
 
     public function showDataById($id)

@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
   
     Route::get('contentArticle/{id}', [ArticleController::class, 'showDataById'])->name('showArticleById');
     Route::get('articles', [ArticleController::class, 'index'])->name('articles');
+    Route::get('articlesPopular', [ArticleController::class, 'indexPopular'])->name('articlesPopular');
 
 });
 
