@@ -13,6 +13,6 @@ admin
 
 bonus yang diambil:\
 hosting:\
-http://ngodingbareng.my.id\
-api:\
+http://ngodingbareng.my.id
+\api:\
 midtrans transaksi pada halaman checkout
