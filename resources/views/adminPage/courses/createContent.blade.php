@@ -145,9 +145,9 @@
                                 </div>
                                 @if ($content->thumbnail == null)
                                     <input type="file" name="thumbnail" id="inputThumbnail"
-                                        onchange="previewImage(event)" required>
+                                        onchange="previewImage(event)" accept="image/jpeg, image/png, image/jpg" required>
                                 @else
-                                    <input type="file" name="thumbnail" id="inputThumbnail"
+                                    <input type="file" name="thumbnail" id="inputThumbnail" accept="image/jpeg, image/png, image/jpg"
                                         onchange="previewImage(event)">
                                 @endif
                             </div>

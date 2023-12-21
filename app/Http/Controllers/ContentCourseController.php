@@ -164,7 +164,7 @@ class ContentCourseController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
-        return redirect()->route('manageCourse')->with('success', 'Content posted!');
+        return redirect()->route('manageCourse')->with('success', 'Content saved successfully!');
     }
 
 
@@ -183,6 +183,6 @@ class ContentCourseController extends Controller
 
         $contents = ContentCourse::where('id_course', $course->id)->get();
 
-        return redirect()->route('editContent', ['id_course' => $course->id, 'id_content' => $contents[0]->id]);
+        return redirect()->route('editContent', ['id_course' => $course->id, 'id_content' => $contents[0]->id])->with('success', 'Content deleted!');
     }
 }
