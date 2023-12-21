@@ -5,13 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
+
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-
 
     public function index()
     {
@@ -68,7 +64,7 @@ class ArticleController extends Controller
         }
 
         // Tambahkan field 'date' dengan nilai waktu sekarang
-        $data['date'] = now();
+        $data['date'] = date('Y-m-d H:i:s');
         $data['status'] = 1;
 
         $article = new Article();

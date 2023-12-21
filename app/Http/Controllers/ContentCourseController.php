@@ -7,24 +7,10 @@ use App\Models\Course;
 use App\Models\Question;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\Bracket;
-use App\Models\Category;
 
 
 class ContentCourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-
     public function show($id_course, $id_content)
     {
         $user = Auth::user();
@@ -119,15 +105,6 @@ class ContentCourseController extends Controller
         if ($lastnullContent) {
             return redirect()->route('editContent', ['id_course' => $course->id, 'id_content' => $lastnullContent->id]);
         }
-        //create content baru
-        // try {
-        //     $content = ContentCourse::create([
-        //         'id_course' => $course->id,
-        //         'list_number' => $content->list_number + 1,
-        //     ]);
-        // } catch (\Exception $e) {
-        //     return redirect()->back()->with('error', $e->getMessage());
-        // }
         return redirect()->route('editContent', ['id_course' => $course->id, 'id_content' => $content->id])->with('success', 'Content successfully saved!');
     }
 

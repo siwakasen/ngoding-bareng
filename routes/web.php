@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('dashboardAdmin', [AdminController::class, 'index'])->name('dashboardAdmin');
+    Route::get('bracketDetails', [AdminController::class, 'bracketDetails'])->name('bracketDetails');
+    Route::get('transactionDetails', [AdminController::class, 'transactionDetails'])->name('transactionDetails');
     Route::get('logoutAdmin', [SignController::class, 'actionLogoutAdmin'])->name('logoutAdmin');
     
     Route::get('manageArticle', [AdminController::class, 'manageArticle'])->name('manageArticle');

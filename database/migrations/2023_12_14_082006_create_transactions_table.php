@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_course')->constrained('courses')->references('id')->on('courses')->onDelete('cascade');
             $table->foreignId('id_bracket')->constrained('brackets')->references('id')->on('brackets')->onDelete('cascade');
-            $table->date('date');
+            $table->datetime('date');
         });
     }
 

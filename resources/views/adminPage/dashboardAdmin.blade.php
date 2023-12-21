@@ -48,7 +48,10 @@
         }
     </style>
     <div class="dashboard">
-        <h1>Dashboard</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="d-inline">Dashboard</h1>
+            <a type="button" href="{{ route('bracketDetails') }}" class="btn btn-primary ml-auto">Transactions</a>
+        </div>
         <hr>
         <div class="box-container">
             <div class="box" style="background-image: linear-gradient(to right, #037ae9 , #0160b9);">

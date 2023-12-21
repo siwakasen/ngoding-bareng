@@ -120,7 +120,7 @@
     </div>
     <section class="section-footer text-center mt-1">
         <div class="py-3 m-0">
-            <h6>&copy;Copyright 2023</h6>
+            <h4>&copy;createdby ngoding-bareng</h4>
         </div>
     </section>
 

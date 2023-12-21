@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_parent')->nullable(); // New column for self-referencing
             $table->foreign('id_parent')->references('id')->on('questions')->onDelete('cascade');
             $table->string('detail_question');
-            $table->date('date');
+            $table->datetime('date');
         });
     }
 

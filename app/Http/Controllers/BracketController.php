@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Bracket;
 use App\Models\Transaction;
 use App\Models\Course;
@@ -48,7 +47,7 @@ class BracketController extends Controller
             $transaction = Transaction::create([
                 'id_course' => $id_course,
                 'id_bracket' => $bracket->id,
-                'date' => date('Y-m-d'),
+                'date' => date('Y-m-d H:i:s'),
             ]);
             $bracket->total_price += Course::find($id_course)->price;
             $bracket->save();
@@ -65,7 +64,7 @@ class BracketController extends Controller
         $transaction = Transaction::create([
             'id_course' => $id_course,
             'id_bracket' => $bracket->id,
-            'date' => date('Y-m-d'),
+            'date' => date('Y-m-d H:i:s'),
         ]);
 
         $bracket->total_price += Course::find($id_course)->price;
@@ -73,25 +72,6 @@ class BracketController extends Controller
         return redirect()->back()->with('success', 'Item added to cart');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Bracket $bracket)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Bracket $bracket)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $transaction = Transaction::find($id);

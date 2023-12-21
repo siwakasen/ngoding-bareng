@@ -67,4 +67,23 @@ class AdminController extends Controller
         return view('adminPage.courses.manageCourse', compact('courses', 'total_revenue', 'categories','count_course'));
     }
 
+    public function bracketDetails(){
+        if (!Auth::guard('admin')->check()) {
+            abort(403, 'Unauthorized action.');
+        }
+        $trans=1;
+        $brackets = Bracket::all();
+
+        return view('adminPage.transactions', compact('trans','brackets'));
+    }
+    public function transactionDetails(){
+        if (!Auth::guard('admin')->check()) {
+            abort(403, 'Unauthorized action.');
+        }
+        $trans=0;
+        $transaction = Transaction::all();
+
+        return view('adminPage.transactions', compact('trans','transaction'));
+    }
+
 }

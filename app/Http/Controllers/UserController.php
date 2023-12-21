@@ -102,12 +102,4 @@ class UserController extends Controller
         return redirect('profile');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
