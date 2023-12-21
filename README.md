@@ -4,15 +4,15 @@ Yessa Nugraheni /210711552
 
 
 login user:\
-riksi\
-riksi123
+username: riksi\
+password: riksi123
 
 login  admin:\
-admin\
-admin
+username: admin\
+password: m3j!kuHibjnIu
 
 ## bonus yang diambil:
 ### hosting:
-http://ngodingbareng.my.id\
+http://ngodingbareng.my.id
 ### api:
 midtrans transaksi pada halaman checkout
