@@ -11,8 +11,8 @@ login  admin:\
 admin\
 admin
 
-bonus yang diambil:\
-hosting:\
+##bonus yang diambil:\
+###hosting:\
 http://ngodingbareng.my.id
-\api:\
+###api:\
 midtrans transaksi pada halaman checkout
