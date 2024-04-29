@@ -1,20 +1,20 @@
 # Installation
 
 ### Clone the repository
-git clone https://github.com/siwakasen/PW2023_B_5_Laravel
+`git clone https://github.com/siwakasen/ngoding_bareng`
 
 ### Navigate into the project directory
-cd repository
+`cd ngoding_bareng`
 
 ### Install Composer dependencies
-composer install
+`composer install`
 
 ### Set up environment variables
-cp .env.example .env
-php artisan key:generate
+`cp .env.example .env
+php artisan key:generate`
 
 ### Run migrations
-php artisan migrate
+`php artisan migrate`
 
 ### Serve the application
-php artisan serve
+`php artisan serve`
